@@ -1,14 +1,30 @@
 package ru.nsu.wallpaper_search.scraper;
 
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
+import ru.nsu.wallpaper_search.tools.PicCell;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Extractor {
     private static final String USERAGENT = "Mozilla/5.0 (Android 8.1.0; Mobile; rv:61.0) Gecko/61.0 Firefox/61.0";
     private static final String REFERRER = "http://www.google.com";
     private static final String YANDEX = "https://yandex.ru/images/search?text=%s&isize=eq&iw=%s&ih=%s";
+
+    private static final String SELECTOR = "div.serp-item.serp-item_type_search";
+    private static final String HTTPS = "https:";
+    private static final String URL = "url";
+    private static final String PREVIEW = "preview";
+    private static final String SERP = "serp-item";
+    private static final String ORIGIN = "origin";
+    private static final String THUMB = "thumb";
+    private static final String BEM = "data-bem";
 
     private static Document getDoc(String link) throws IOException {
         return Jsoup.connect(link).userAgent(USERAGENT).referrer(REFERRER).get();
@@ -20,5 +36,10 @@ public class Extractor {
         return getDoc(page);
     }
 
+    public static List<PicCell> getPictures(Document picsPage) throws IOException {
+        var result = new ArrayList<PicCell>();
+        Elements pics = picsPage.select(SELECTOR);
 
+        return result;
+    }
 }
