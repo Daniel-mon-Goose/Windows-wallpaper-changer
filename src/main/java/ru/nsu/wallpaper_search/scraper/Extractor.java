@@ -49,6 +49,17 @@ public class Extractor {
             }
             var cell = new PicCell(smallPicLink);
 
+            var bigPicPreviews = picData.getJSONArray(PREVIEW);
+            for (var preview: bigPicPreviews) {
+                String bigPickLink;
+                try {
+                    bigPickLink = ((JSONObject) preview).getJSONObject(ORIGIN).getString(URL);
+                } catch (JSONException e) {
+                    bigPickLink = ((JSONObject) preview).getString(URL);
+                }
+                cell.addOriginal(bigPickLink);
+            }
+            result.add(cell);
         }
 
         return result;
