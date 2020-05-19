@@ -19,4 +19,6 @@ public class Extractor {
         String page = String.format(YANDEX, theme, nums[0], nums[1]);
         return getDoc(page);
     }
+
+
 }
