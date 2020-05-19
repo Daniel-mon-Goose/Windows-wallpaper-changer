@@ -40,6 +40,17 @@ public class Extractor {
         var result = new ArrayList<PicCell>();
         Elements pics = picsPage.select(SELECTOR);
 
+        for (Element pic: pics) {
+            var picData = new JSONObject(pic.attr(BEM)).getJSONObject(SERP);
+
+            var smallPicLink = picData.getJSONObject(THUMB).getString(URL);
+            if (!smallPicLink.startsWith(HTTPS)) {
+                smallPicLink = HTTPS.concat(smallPicLink);
+            }
+            var cell = new PicCell(smallPicLink);
+
+        }
+
         return result;
     }
 }
