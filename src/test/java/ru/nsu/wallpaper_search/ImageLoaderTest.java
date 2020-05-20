@@ -17,6 +17,7 @@ public class ImageLoaderTest {
             "download/1600x900/princess-zelda-elf-ears-the-legend-of-zelda-smiling-blonde-anime-games.jpeg";
 
     private static final String alternatePath = "C:/Users/%s/WallpaperSearcher/found.jpg";
+    private static final String path = "C:/Users/%s/found.jpg";
 
     @Test
     public void loadTest() throws IOException {
@@ -31,5 +32,11 @@ public class ImageLoaderTest {
                 || String.format(alternatePath, user).equals(path));
     }
 
+    @Test
+    public void failureTest() {
+        var blockedCell = new PicCell("https://im0-tub-ru.yandex.net/i?id=b92098ac236759f72aa489975efb76c8&n=13");
+        blockedCell.addOriginal(blockedLink);
 
+        Assert.assertThrows(error, () -> ImageLoader.load(blockedCell));
+    }
 }
