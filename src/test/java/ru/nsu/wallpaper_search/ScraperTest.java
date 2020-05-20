@@ -22,25 +22,21 @@ public class ScraperTest {
     }
 
     @Test
-    public void jsoupWebsiteTest() {
-        try {
-            Document doc = Jsoup.connect("https://wallhaven.cc/")
-                    .userAgent("Chrome/4.0.249.0 Safari/532.5")
-                    .referrer("http://www.google.com")
-                    .get();
+    public void jsoupWebsiteTest() throws IOException {
+        Document doc = Jsoup.connect("https://wallhaven.cc/")
+                .userAgent("Chrome/4.0.249.0 Safari/532.5")
+                .referrer("http://www.google.com")
+                .get();
 
-            Element firstLine = doc.selectFirst("div.more-feat").child(0);
+        Element firstLine = doc.selectFirst("div.more-feat").child(0);
 
-            Assert.assertNotEquals(firstLine.children().size(), 0);
+        Assert.assertNotEquals(firstLine.children().size(), 0);
 
-            for (var elem: firstLine.children()) {
-                var dat = elem.selectFirst("img").attr("src");
-                System.out.println(dat.replaceFirst("th", "w")
-                        .replaceFirst("small", "full")
-                        .replaceAll("(.{6})\\.jpg", "wallhaven-$1.jpg"));
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
+        for (var elem: firstLine.children()) {
+            var dat = elem.selectFirst("img").attr("src");
+            System.out.println(dat.replaceFirst("th", "w")
+                    .replaceFirst("small", "full")
+                    .replaceAll("(.{6})\\.jpg", "wallhaven-$1.jpg"));
         }
     }
 
@@ -52,7 +48,7 @@ public class ScraperTest {
     @Test
     public void accessPics() throws IOException {
         var heyListen = new Scraper();
-        var pics = heyListen.respondWithQuery("1920x1080", "memes");
+        var pics = heyListen.respondWithQuery("1920x1080", "zelda");
 
         Assert.assertNotEquals(pics.size(), 0);
         printResult(pics);
