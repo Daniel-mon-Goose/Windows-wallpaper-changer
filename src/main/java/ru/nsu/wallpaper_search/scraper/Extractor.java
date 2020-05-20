@@ -31,7 +31,7 @@ public class Extractor {
 
     private static Map<String, String> cookies = new HashMap<>();
 
-    private static Document getDoc(String link, boolean useCookies) throws IOException {
+    public static Document getDoc(String link, boolean useCookies) throws IOException {
         var launchPad = Jsoup.connect(link).userAgent(USERAGENT).referrer(REFERRER);
 
         if (!useCookies) {

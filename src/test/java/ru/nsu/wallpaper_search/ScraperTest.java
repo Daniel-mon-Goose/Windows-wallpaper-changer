@@ -24,10 +24,7 @@ public class ScraperTest {
 
     @Test
     public void jsoupWebsiteTest() throws IOException {
-        Document doc = Jsoup.connect("https://wallhaven.cc/")
-                .userAgent("Chrome/4.0.249.0 Safari/532.5")
-                .referrer("http://www.google.com")
-                .get();
+        Document doc = Extractor.getDoc("https://wallhaven.cc/", false);
 
         Element firstLine = doc.selectFirst("div.more-feat").child(0);
 
