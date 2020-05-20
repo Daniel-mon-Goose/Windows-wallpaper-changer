@@ -46,13 +46,7 @@ public class ScraperTest {
 
     @Test
     public void accessPage() throws IOException {
-        try {
-            var doc = Extractor.accessPicturesPage("1920x1080", "muffin");
-            System.out.println();
-        } catch (IOException e) {
-            e.printStackTrace();
-            throw e;
-        }
+        var doc = Extractor.accessPicturesPage("1920x1080", "muffin");
     }
 
     @Test
