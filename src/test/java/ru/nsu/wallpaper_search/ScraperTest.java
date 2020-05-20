@@ -47,8 +47,7 @@ public class ScraperTest {
 
     @Test
     public void accessPics() throws IOException {
-        var heyListen = new Scraper();
-        var pics = heyListen.respondWithQuery("1920x1080", "zelda");
+        var pics = new Scraper().respondWithQuery("1920x1080", "zelda");
 
         Assert.assertNotEquals(pics.size(), 0);
         printResult(pics);
@@ -56,24 +55,21 @@ public class ScraperTest {
 
     @Test
     public void invalidResolution() throws IOException {
-        var heyListen = new Scraper();
-        var pics = heyListen.respondWithQuery("10x1000", "memes");
+        var pics = new Scraper().respondWithQuery("10x1000", "memes");
 
         Assert.assertEquals(pics.size(), 0);
     }
 
     @Test
     public void inconsistentRequest() throws IOException {
-        var heyListen = new Scraper();
-        var pics = heyListen.respondWithQuery("1920x1080", "аавауаупвпивам");
+        var pics = new Scraper().respondWithQuery("1920x1080", "аавауаупвпивам");
         Assert.assertNotEquals(pics.size(), 0);
         printResult(pics);
     }
 
     @Test
     public void cyrillicRequest() throws IOException {
-        var heyListen = new Scraper();
-        var pics = heyListen.respondWithQuery("1920x1080", "автокары");
+        var pics = new Scraper().respondWithQuery("1920x1080", "автокары");
 
         Assert.assertNotEquals(pics.size(), 0);
         printResult(pics);
