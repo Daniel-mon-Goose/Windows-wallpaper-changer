@@ -1,6 +1,5 @@
 package ru.nsu.wallpaper_search;
 
-import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.junit.Assert;

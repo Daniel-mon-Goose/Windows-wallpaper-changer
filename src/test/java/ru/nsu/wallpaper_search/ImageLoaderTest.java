@@ -21,6 +21,10 @@ public class ImageLoaderTest {
 
     @Test
     public void loadTest() throws IOException {
+        if (!System.getProperty("os.name").toLowerCase().contains("win")) {
+            System.out.println("Currently windows supported only");
+        }
+
         var workingCell = new PicCell("https://im0-tub-ru.yandex.net/i?id=81ef90734d287839980ce545c9dc3696&n=13");
         workingCell.addOriginal(blockedLink);
         workingCell.addOriginal(workingLink);
