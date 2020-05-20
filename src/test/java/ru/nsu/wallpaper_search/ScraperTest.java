@@ -73,4 +73,13 @@ public class ScraperTest {
         Assert.assertNotEquals(pics.size(), 0);
         printResult(pics);
     }
+
+    @Test
+    public void cyrillicRequest() throws IOException {
+        var heyListen = new Scraper();
+        var pics = heyListen.respondWithQuery("1920x1080", "автокары");
+
+        Assert.assertNotEquals(pics.size(), 0);
+        printResult(pics);
+    }
 }
