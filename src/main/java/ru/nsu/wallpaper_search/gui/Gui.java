@@ -4,9 +4,10 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 
-import java.awt.*;
+import javafx.geometry.Rectangle2D;
 import java.io.IOException;
 
 public class Gui extends Application {
@@ -14,7 +15,7 @@ public class Gui extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        Dimension screenRes = Toolkit.getDefaultToolkit().getScreenSize();
+        Rectangle2D screenRes = Screen.getPrimary().getBounds();
         scene = new Scene(loadFXML("primary"), screenRes.getWidth() * 0.3, screenRes.getHeight() * 0.4);
         stage.setScene(scene);
         stage.setResizable(false);
