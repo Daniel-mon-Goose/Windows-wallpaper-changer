@@ -5,6 +5,7 @@ module ru.nsu.wallpaper_search.gui {
     requires com.sun.jna.platform;
     requires org.json;
     requires org.jsoup;
+    requires java.desktop;
 
     opens ru.nsu.wallpaper_search.gui to javafx.fxml;
     exports ru.nsu.wallpaper_search.gui;
