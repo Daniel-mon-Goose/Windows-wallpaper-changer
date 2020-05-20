@@ -7,6 +7,8 @@ import java.util.List;
 
 public class Scraper {
     public List<PicCell> respondWithQuery(String size, String theme) throws IOException {
+        theme = theme.trim();
+
         var doc = Extractor.accessPicturesPage(size, theme);
         var result = Extractor.getPictures(doc);
         result.addAll(Extractor.getPictures(doc));
