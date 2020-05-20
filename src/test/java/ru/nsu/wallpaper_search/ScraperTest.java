@@ -6,6 +6,7 @@ import org.jsoup.nodes.Element;
 import org.junit.Assert;
 import org.junit.Test;
 import ru.nsu.wallpaper_search.scraper.Extractor;
+import ru.nsu.wallpaper_search.scraper.Scraper;
 
 import java.io.IOException;
 
@@ -42,5 +43,13 @@ public class ScraperTest {
             e.printStackTrace();
             throw e;
         }
+    }
+
+    @Test
+    public void accessPics() throws IOException {
+        var heyListen = new Scraper();
+        var pics = heyListen.respondWithQuery("1920x1080", "memes");
+
+        Assert.assertNotEquals(pics.size(), 0);
     }
 }
