@@ -1,5 +1,6 @@
 package ru.nsu.wallpaper_search.scraper;
 
+import com.sun.jna.WString;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.jsoup.Jsoup;
@@ -10,7 +11,9 @@ import ru.nsu.wallpaper_search.tools.PicCell;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Extractor {
     private static final String USERAGENT = "Mozilla/5.0 (Android 8.1.0; Mobile; rv:61.0) Gecko/61.0 Firefox/61.0";
@@ -26,14 +29,24 @@ public class Extractor {
     private static final String THUMB = "thumb";
     private static final String BEM = "data-bem";
 
-    private static Document getDoc(String link) throws IOException {
-        return Jsoup.connect(link).userAgent(USERAGENT).referrer(REFERRER).get();
+    private static Map<String, String> cookies = new HashMap<>();
+
+    private static Document getDoc(String link, boolean useCookies) throws IOException {
+        var launchPad = Jsoup.connect(link).userAgent(USERAGENT).referrer(REFERRER);
+
+        if (!useCookies) {
+            return launchPad.get();
+        }
+
+        var connection = launchPad.cookies(cookies).execute();
+        cookies.putAll(connection.cookies());
+        return connection.parse();
     }
 
     public static Document accessPicturesPage(String resolution, String theme) throws IOException {
         var nums = resolution.split("x");
         String page = String.format(YANDEX, theme, nums[0], nums[1]);
-        return getDoc(page);
+        return getDoc(page, true);
     }
 
     public static List<PicCell> getPictures(Document picsPage) throws IOException {
