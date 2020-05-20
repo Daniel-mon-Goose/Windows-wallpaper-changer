@@ -9,6 +9,7 @@ import ru.nsu.wallpaper_search.scraper.Scraper;
 import ru.nsu.wallpaper_search.tools.PicCell;
 
 import java.io.IOException;
+import java.net.ConnectException;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -19,6 +20,14 @@ public class ScraperTest {
             cell.originals.forEach(System.out::println);
             System.out.println();
         });
+    }
+
+    private int scrapingAutomatedVersion(String size, String theme) throws IOException, InterruptedException {
+        TimeUnit.SECONDS.sleep(5);
+        var pics = new Scraper().respondWithQuery(size, theme);
+        printResult(pics);
+
+        return pics.size();
     }
 
     @Test
@@ -44,35 +53,41 @@ public class ScraperTest {
 
     @Test
     public void accessPics() throws IOException, InterruptedException {
-        TimeUnit.SECONDS.sleep(5);
-        var pics = new Scraper().respondWithQuery("1920x1080", "zelda");
-
-        Assert.assertNotEquals(pics.size(), 0);
-        printResult(pics);
+        try {
+            int size = scrapingAutomatedVersion("1920x1080", "zelda");
+            Assert.assertNotEquals(size, 0);
+        } catch (ConnectException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     @Test
     public void invalidResolution() throws IOException, InterruptedException {
-        TimeUnit.SECONDS.sleep(5);
-        var pics = new Scraper().respondWithQuery("10x1000", "memes");
-
-        Assert.assertEquals(pics.size(), 0);
+        try {
+            int size = scrapingAutomatedVersion("10x1000", "memes");
+            Assert.assertEquals(size, 0);
+        } catch (ConnectException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     @Test
     public void inconsistentRequest() throws IOException, InterruptedException {
-        TimeUnit.SECONDS.sleep(5);
-        var pics = new Scraper().respondWithQuery("1920x1080", "аавауаупвпивам");
-        Assert.assertNotEquals(pics.size(), 0);
-        printResult(pics);
+        try {
+            int size = scrapingAutomatedVersion("1920x1080", "аавауаупвпивам");
+            Assert.assertNotEquals(size, 0);
+        } catch (ConnectException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     @Test
     public void cyrillicRequest() throws IOException, InterruptedException {
-        TimeUnit.SECONDS.sleep(5);
-        var pics = new Scraper().respondWithQuery("1920x1080", "автокары");
-
-        Assert.assertNotEquals(pics.size(), 0);
-        printResult(pics);
+        try {
+            int size = scrapingAutomatedVersion("1600x900", "автокары");
+            Assert.assertNotEquals(size, 0);
+        } catch (ConnectException e) {
+            System.out.println(e.getMessage());
+        }
     }
 }
