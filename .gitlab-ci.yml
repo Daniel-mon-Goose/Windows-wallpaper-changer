@@ -3,7 +3,6 @@ image: maven:3-jdk-13
 stages:
   - build
   - test
-  - production
 
 variables:
   MAVEN_CLI_OPTS: "--batch-mode"
@@ -23,8 +22,3 @@ test:
   stage: test
   script:
     - mvn $MAVEN_CLI_OPTS test
-    
-production:
-  stage: production
-  script:
-    - mvn $MAVEN_CLI_OPTS production
