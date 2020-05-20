@@ -6,6 +6,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import java.awt.*;
 import java.io.IOException;
 
 public class Gui extends Application {
@@ -13,7 +14,8 @@ public class Gui extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        scene = new Scene(loadFXML("primary"));
+        Dimension screenRes = Toolkit.getDefaultToolkit().getScreenSize();
+        scene = new Scene(loadFXML("primary"), screenRes.getWidth() * 0.3, screenRes.getHeight() * 0.4);
         stage.setScene(scene);
         stage.setResizable(false);
         stage.show();
