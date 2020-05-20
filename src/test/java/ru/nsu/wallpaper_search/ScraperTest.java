@@ -48,7 +48,7 @@ public class ScraperTest {
 
     @Test
     public void accessPics() throws IOException, InterruptedException {
-        TimeUnit.SECONDS.sleep(1);
+        TimeUnit.SECONDS.sleep(5);
         var pics = new Scraper().respondWithQuery("1920x1080", "zelda");
 
         Assert.assertNotEquals(pics.size(), 0);
@@ -57,7 +57,7 @@ public class ScraperTest {
 
     @Test
     public void invalidResolution() throws IOException, InterruptedException {
-        TimeUnit.SECONDS.sleep(1);
+        TimeUnit.SECONDS.sleep(5);
         var pics = new Scraper().respondWithQuery("10x1000", "memes");
 
         Assert.assertEquals(pics.size(), 0);
@@ -65,7 +65,7 @@ public class ScraperTest {
 
     @Test
     public void inconsistentRequest() throws IOException, InterruptedException {
-        TimeUnit.SECONDS.sleep(1);
+        TimeUnit.SECONDS.sleep(5);
         var pics = new Scraper().respondWithQuery("1920x1080", "аавауаупвпивам");
         Assert.assertNotEquals(pics.size(), 0);
         printResult(pics);
@@ -73,7 +73,7 @@ public class ScraperTest {
 
     @Test
     public void cyrillicRequest() throws IOException, InterruptedException {
-        TimeUnit.SECONDS.sleep(1);
+        TimeUnit.SECONDS.sleep(5);
         var pics = new Scraper().respondWithQuery("1920x1080", "автокары");
 
         Assert.assertNotEquals(pics.size(), 0);
