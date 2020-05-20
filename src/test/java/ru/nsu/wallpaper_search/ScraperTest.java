@@ -57,4 +57,12 @@ public class ScraperTest {
         Assert.assertNotEquals(pics.size(), 0);
         printResult(pics);
     }
+
+    @Test
+    public void invalidResolution() throws IOException {
+        var heyListen = new Scraper();
+        var pics = heyListen.respondWithQuery("10x1000", "memes");
+
+        Assert.assertEquals(pics.size(), 0);
+    }
 }
