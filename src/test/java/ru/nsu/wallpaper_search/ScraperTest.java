@@ -7,10 +7,20 @@ import org.junit.Assert;
 import org.junit.Test;
 import ru.nsu.wallpaper_search.scraper.Extractor;
 import ru.nsu.wallpaper_search.scraper.Scraper;
+import ru.nsu.wallpaper_search.tools.PicCell;
 
 import java.io.IOException;
+import java.util.List;
 
 public class ScraperTest {
+    private void printResult(List<PicCell> pics) {
+        pics.forEach(cell -> {
+            System.out.println(cell.thumb);
+            cell.originals.forEach(System.out::println);
+            System.out.println();
+        });
+    }
+
     @Test
     public void jsoupWebsiteTest() {
         try {
@@ -51,5 +61,6 @@ public class ScraperTest {
         var pics = heyListen.respondWithQuery("1920x1080", "memes");
 
         Assert.assertNotEquals(pics.size(), 0);
+        printResult(pics);
     }
 }
