@@ -11,6 +11,7 @@ import ru.nsu.wallpaper_search.tools.PicCell;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class ScraperTest {
     private void printResult(List<PicCell> pics) {
@@ -46,7 +47,8 @@ public class ScraperTest {
     }
 
     @Test
-    public void accessPics() throws IOException {
+    public void accessPics() throws IOException, InterruptedException {
+        TimeUnit.SECONDS.sleep(1);
         var pics = new Scraper().respondWithQuery("1920x1080", "zelda");
 
         Assert.assertNotEquals(pics.size(), 0);
@@ -54,21 +56,24 @@ public class ScraperTest {
     }
 
     @Test
-    public void invalidResolution() throws IOException {
+    public void invalidResolution() throws IOException, InterruptedException {
+        TimeUnit.SECONDS.sleep(1);
         var pics = new Scraper().respondWithQuery("10x1000", "memes");
 
         Assert.assertEquals(pics.size(), 0);
     }
 
     @Test
-    public void inconsistentRequest() throws IOException {
+    public void inconsistentRequest() throws IOException, InterruptedException {
+        TimeUnit.SECONDS.sleep(1);
         var pics = new Scraper().respondWithQuery("1920x1080", "аавауаупвпивам");
         Assert.assertNotEquals(pics.size(), 0);
         printResult(pics);
     }
 
     @Test
-    public void cyrillicRequest() throws IOException {
+    public void cyrillicRequest() throws IOException, InterruptedException {
+        TimeUnit.SECONDS.sleep(1);
         var pics = new Scraper().respondWithQuery("1920x1080", "автокары");
 
         Assert.assertNotEquals(pics.size(), 0);
