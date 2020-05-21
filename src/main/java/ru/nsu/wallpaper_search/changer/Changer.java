@@ -6,7 +6,7 @@ import com.sun.jna.win32.StdCallLibrary;
 import com.sun.jna.win32.W32APIFunctionMapper;
 import com.sun.jna.win32.W32APITypeMapper;
 
-import java.util.HashMap;
+import java.util.Map;
 
 public class Changer {
     public static void changeDesktopImage(String path) {
@@ -22,12 +22,8 @@ public class Changer {
         long SPIF_UPDATEINIFILE = 0x01;
         long SPIF_SENDWININICHANGE = 0x02;
 
-        SPI INSTANCE = Native.loadLibrary("user32", SPI.class, new HashMap<>() {
-            {
-                put(OPTION_TYPE_MAPPER, W32APITypeMapper.UNICODE);
-                put(OPTION_FUNCTION_MAPPER, W32APIFunctionMapper.UNICODE);
-            }
-        });
+        SPI INSTANCE = Native.load("user32", SPI.class, Map.of(OPTION_TYPE_MAPPER, W32APITypeMapper.UNICODE,
+                OPTION_FUNCTION_MAPPER, W32APIFunctionMapper.UNICODE));
 
         void SystemParametersInfo(WinDef.UINT_PTR uiAction, WinDef.UINT_PTR uiParam,
                                   String pvParam, WinDef.UINT_PTR fWinIni

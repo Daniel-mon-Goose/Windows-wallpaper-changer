@@ -2,6 +2,7 @@ package ru.nsu.wallpaper_search;
 
 import org.junit.Assert;
 import org.junit.Test;
+import ru.nsu.wallpaper_search.changer.Changer;
 import ru.nsu.wallpaper_search.exceptions.ImageLoadException;
 import ru.nsu.wallpaper_search.tools.ImageLoader;
 import ru.nsu.wallpaper_search.tools.PicCell;
@@ -35,6 +36,8 @@ public class ImageLoaderTest {
         var user = System.getProperty("user.name");
         Assert.assertTrue(String.format(path, user).equals(path)
                 || String.format(alternatePath, user).equals(path));
+
+        //Changer.changeDesktopImage(path);
     }
 
     @Test
