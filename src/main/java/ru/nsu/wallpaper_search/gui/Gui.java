@@ -16,6 +16,10 @@ public class Gui extends JFrame {
     private JButton searchButton;
     private int viewWidth, viewHeight;
 
+    public JTextField getQueryField() {
+        return queryField;
+    }
+
     public Gui() {
         setContentPane(contentPane);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -45,9 +49,22 @@ public class Gui extends JFrame {
 
     public void addSearshListener(ActionListener l) { searchButton.addActionListener(l);}
 
-    private void createPlaceholder(JTextField textField, String placeholder, FocusListener f) {
-        textField.setText(placeholder);
-        textField.setForeground(Color.GRAY);
-        textField.addFocusListener(f);
+    public void createPlaceholder(String placeholder, FocusListener f) {
+        queryField.setText(placeholder);
+        queryField.setForeground(Color.GRAY);
+        queryField.addFocusListener(f);
     }
+
+    public void setText(JTextField field, String text) {
+        field.setText(text);
+    }
+
+    public void setForeground(JTextField field, Color color) {
+        field.setForeground(color);
+    }
+
+    public String getText(JTextField field) {
+        return field.getText();
+    }
+
 }
