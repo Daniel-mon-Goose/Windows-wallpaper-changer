@@ -12,7 +12,7 @@ variables:
   
 sonareqube-check:
   script:
-    - mvn verify sonar:sonar -Dsonar.qualitygate.wait=true
+    - mvn sonar:sonar -Dsonar.host.url=$SONAR_HOST_URL -Dsonar.token=$SONAR_TOKEN
   allow_failure: true
   only:
     - master
