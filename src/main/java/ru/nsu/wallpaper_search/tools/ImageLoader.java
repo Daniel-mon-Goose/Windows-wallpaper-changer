@@ -9,22 +9,22 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 
 public class ImageLoader {
-    private static final String alternatePath = "C:/Users/%s/WallpaperSearcher/found.jpg";
-    private static final String path = "C:/Users/%s/found.jpg";
-    private static final String folder = "C:/Users/%s/WallpaperSearcher";
+    private static final String ALTERNATEPATH = "C:/Users/%s/WallpaperSearcher/found.jpg";
+    private static final String PATH = "C:/Users/%s/found.jpg";
+    private static final String FOLDER = "C:/Users/%s/WallpaperSearcher";
 
     public static String load(PicCell links) throws ImageLoadException {
         long flag = -1;
         String user = System.getProperty("user.name");
-        String datPath =  String.format(folder, user);
+        String datPath =  String.format(FOLDER, user);
 
         try {
             if (!Files.exists(Paths.get(datPath))) {
                 Files.createDirectory(Paths.get(datPath));
             }
-            datPath = alternatePath;
+            datPath = ALTERNATEPATH;
         } catch (IOException ignored) {
-            datPath = path;
+            datPath = PATH;
         }
 
         datPath = String.format(datPath, user);
