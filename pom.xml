@@ -43,7 +43,7 @@
                 <artifactId>javafx-maven-plugin</artifactId>
                 <version>0.0.1</version>
                 <configuration>
-                    <mainClass>ru.nsu.wallpaper_search.gui.Gui</mainClass>
+                    <mainClass>ru.nsu.wallpaper_search.Main</mainClass>
                 </configuration>
             </plugin>
         </plugins>
