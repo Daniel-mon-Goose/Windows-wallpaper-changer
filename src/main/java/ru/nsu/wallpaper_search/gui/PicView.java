@@ -8,17 +8,27 @@ import java.awt.image.BufferedImage;
 public class PicView extends JFrame {
     private JPanel contentPane;
     private JButton setButton, cancelButton;
+    private int picWidth, picHeight;
 
     public PicView(BufferedImage pic) {
         contentPane = new JPanel();
+
+        picWidth = pic.getWidth();
+        picHeight = pic.getHeight();
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        if (picWidth >= screenSize.getWidth() - 100 || picHeight >= screenSize.getHeight() - 100) {
+            picWidth =  (int)(picWidth * 0.4);
+            picHeight = (int)(picHeight * 0.4);
+        } 
+
         JPanel picPane = new JPanel() {
             @Override
             protected void paintComponent(Graphics g) {
                 super.paintComponent(g);
-                g.drawImage(pic, 0, 0, this);
+                g.drawImage(pic, 0, 0, picWidth, picHeight, this);
             }
         };
-        picPane.setPreferredSize(new Dimension(pic.getWidth(), pic.getHeight()));
+        picPane.setPreferredSize(new Dimension(picWidth, picHeight));
 
         setButton = new JButton();
         cancelButton = new JButton();
@@ -34,7 +44,7 @@ public class PicView extends JFrame {
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setTitle("Wallpaper search");
 
-        this.setPreferredSize(new Dimension((int)(pic.getWidth() * 1.1), pic.getHeight() + 50));
+        this.setPreferredSize(new Dimension((int)(picWidth * 1.1), picHeight + 50));
         this.setResizable(false);
 
     }
