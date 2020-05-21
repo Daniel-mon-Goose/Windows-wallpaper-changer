@@ -4,7 +4,7 @@ import ru.nsu.wallpaper_search.gui.GuiController;
 
 public class Main {
     public static void main(String[] args) {
-        GuiController guiController = new GuiController();
+        GuiController guiController = new GuiController(()-> System.out.println("notify"));
     }
 
 }
