@@ -55,7 +55,7 @@ public class ScraperTest {
     public void accessPics() throws IOException, InterruptedException {
         try {
             int size = scrapingAutomatedVersion("1920x1080", "zelda");
-            Assert.assertNotEquals(size, 0);
+            Assert.assertNotEquals(0, size);
         } catch (ConnectException e) {
             System.out.println(e.getMessage());
         }
@@ -65,7 +65,7 @@ public class ScraperTest {
     public void invalidResolution() throws IOException, InterruptedException {
         try {
             int size = scrapingAutomatedVersion("10x1000", "memes");
-            Assert.assertEquals(size, 0);
+            Assert.assertEquals(0, size);
         } catch (ConnectException e) {
             System.out.println(e.getMessage());
         }
@@ -75,7 +75,7 @@ public class ScraperTest {
     public void inconsistentRequest() throws IOException, InterruptedException {
         try {
             int size = scrapingAutomatedVersion("1920x1080", "аавауаупвпивам");
-            Assert.assertNotEquals(size, 0);
+            Assert.assertNotEquals(0, size);
         } catch (ConnectException e) {
             System.out.println(e.getMessage());
         }
@@ -85,7 +85,7 @@ public class ScraperTest {
     public void cyrillicRequest() throws IOException, InterruptedException {
         try {
             int size = scrapingAutomatedVersion("1600x900", "автокары");
-            Assert.assertNotEquals(size, 0);
+            Assert.assertNotEquals(0, size);
         } catch (ConnectException e) {
             System.out.println(e.getMessage());
         }
