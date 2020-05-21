@@ -9,6 +9,7 @@ variables:
   MAVEN_OPTS: "-Dmaven.repo.local=.m2/repository"
   SONAR_TOKEN: fb911861a0ff4db3bc1b0eaf1a079d2104dae04c
   SONAR_HOST_URL: http://84.237.50.237:9000
+  GIT_DEPTH: 0
   
 cache:
   paths:
