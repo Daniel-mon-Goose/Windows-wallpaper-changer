@@ -1,14 +1,17 @@
 package ru.nsu.wallpaper_search.gui;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 
 public class GuiController {
     private Gui view;
+    private Runnable notifier;
     private static final String placeholder = "Enter your request.....";
 
-    public GuiController() {
+    public GuiController(Runnable notifier) {
+        this.notifier = notifier;
         view = new Gui();
         view.pack();
         view.setVisible(true);
@@ -29,5 +32,16 @@ public class GuiController {
                 }
             }
         });
+
+        view.addSearshListener(this::notifyOnSearch);
     }
+
+    private void notifyOnSearch(ActionEvent e) {
+        notifier.run();
+    }
+
+    private String getRequest() {
+        return view.getText(view.getQueryField());
+    }
+
 }
