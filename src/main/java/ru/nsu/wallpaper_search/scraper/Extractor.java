@@ -1,6 +1,5 @@
 package ru.nsu.wallpaper_search.scraper;
 
-import com.sun.jna.WString;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.jsoup.Jsoup;
@@ -29,7 +28,11 @@ public class Extractor {
     private static final String THUMB = "thumb";
     private static final String BEM = "data-bem";
 
-    private static Map<String, String> cookies = new HashMap<>();
+    private static final Map<String, String> cookies = new HashMap<>();
+
+    private Extractor() {
+        throw new IllegalStateException("Utility class");
+    }
 
     public static Document getDoc(String link, boolean useCookies) throws IOException {
         var launchPad = Jsoup.connect(link).userAgent(USERAGENT).referrer(REFERRER);
@@ -49,7 +52,7 @@ public class Extractor {
         return getDoc(page, true);
     }
 
-    public static List<PicCell> getPictures(Document picsPage) throws IOException {
+    public static List<PicCell> getPictures(Document picsPage) {
         var result = new ArrayList<PicCell>();
         Elements pics = picsPage.select(SELECTOR);
 

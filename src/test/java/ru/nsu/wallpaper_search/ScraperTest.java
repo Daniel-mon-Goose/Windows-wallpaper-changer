@@ -16,8 +16,8 @@ import java.util.concurrent.TimeUnit;
 public class ScraperTest {
     private void printResult(List<PicCell> pics) {
         pics.forEach(cell -> {
-            System.out.println(cell.thumb);
-            cell.originals.forEach(System.out::println);
+            System.out.println(cell.getThumb());
+            cell.getOriginals().forEach(System.out::println);
             System.out.println();
         });
     }

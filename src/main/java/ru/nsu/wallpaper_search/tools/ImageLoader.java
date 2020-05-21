@@ -13,6 +13,10 @@ public class ImageLoader {
     private static final String PATH = "C:/Users/%s/found.jpg";
     private static final String FOLDER = "C:/Users/%s/WallpaperSearcher";
 
+    private ImageLoader() {
+        throw new IllegalStateException("Utility class");
+    }
+
     public static String load(PicCell links) throws ImageLoadException {
         long flag = -1;
         String user = System.getProperty("user.name");
@@ -28,7 +32,7 @@ public class ImageLoader {
         }
 
         datPath = String.format(datPath, user);
-        for (var link: links.originals) {
+        for (var link: links.getOriginals()) {
             try (var netStream = new URL(link).openStream()) {
                 flag = Files.copy(netStream, Paths.get(datPath), StandardCopyOption.REPLACE_EXISTING);
             } catch (IOException ignored) { }
