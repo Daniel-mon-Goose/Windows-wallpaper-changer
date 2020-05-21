@@ -47,11 +47,6 @@ public class ScraperTest {
     }
 
     @Test
-    public void accessPage() throws IOException {
-        var doc = Extractor.accessPicturesPage("1920x1080", "muffin");
-    }
-
-    @Test
     public void accessPics() throws IOException, InterruptedException {
         try {
             int size = scrapingAutomatedVersion("1920x1080", "zelda");
