@@ -2,6 +2,7 @@ package ru.nsu.wallpaper_search.gui;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 
 public class PicView extends JFrame {
@@ -35,10 +36,17 @@ public class PicView extends JFrame {
 
         this.setPreferredSize(new Dimension((int)(pic.getWidth() * 1.1), pic.getHeight() + 50));
         this.setResizable(false);
+
     }
 
     private void setButtonDesign(JButton button, int width, int height, String text) {
         button.setPreferredSize(new Dimension(width, height));
         button.setText(text);
     }
+
+    void addOkButtonActionListener(ActionListener l) { setButton.addActionListener(l); }
+
+    void addCancelButtonActionListener(ActionListener l) { cancelButton.addActionListener(l); }
+
+    void closeWindow() { dispose(); }
 }
