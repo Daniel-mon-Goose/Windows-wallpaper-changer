@@ -28,7 +28,7 @@ test:
     
 sonareqube-check:
   script:
-    - mvn clean install sonar:sonar -Dsonar.projectKey=ru.nsu.wallpaper_search:wallpaper_search -Dsonar.host.url=$SONAR_HOST_URL -Dsonar.login=$SONAR_TOKEN
+    - mvn sonar:sonar -Dsonar.projectKey=ru.nsu.wallpaper_search:wallpaper_search -Dsonar.host.url=$SONAR_HOST_URL -Dsonar.login=$SONAR_TOKEN
   allow_failure: true
   only:
     - master
