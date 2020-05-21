@@ -8,6 +8,8 @@
 
 <VBox alignment="CENTER" spacing="15.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.nsu.wallpaper_search.gui.PrimaryController">
     <children>
+        <Label alignment="CENTER" text="Your device's screen resolution is"/>
+        <Label fx:id="resolution" alignment="CENTER" />
         <Label alignment="CENTER" text="Enter resolution" />
         <HBox alignment="TOP_CENTER" prefHeight="26.0" prefWidth="200.0" spacing="7.0">
             <Label contentDisplay="CENTER" prefHeight="26.0" prefWidth="9.0" text="w" wrapText="true" />

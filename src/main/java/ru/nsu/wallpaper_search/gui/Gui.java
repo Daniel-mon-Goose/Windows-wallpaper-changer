@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
-public class GuiView extends JFrame {
+public class Gui extends JFrame {
 
     private JPanel contentPane, prefPane, queryPane, resultsPane;
     private JComboBox widthBox, heightBox;
@@ -14,7 +14,7 @@ public class GuiView extends JFrame {
     private JButton searchButton;
     private int viewWidth, viewHeight;
 
-    public GuiView() {
+    public Gui() {
         setContentPane(contentPane);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setTitle("Wallpaper search");
