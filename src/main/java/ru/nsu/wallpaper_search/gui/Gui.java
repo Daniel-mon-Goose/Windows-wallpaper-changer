@@ -3,6 +3,8 @@ package ru.nsu.wallpaper_search.gui;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 
 public class Gui extends JFrame {
 
@@ -39,5 +41,13 @@ public class Gui extends JFrame {
                 heightBox.addItem(heightItem);
             }
         }
+    }
+
+    public void addSearshListener(ActionListener l) { searchButton.addActionListener(l);}
+
+    private void createPlaceholder(JTextField textField, String placeholder, FocusListener f) {
+        textField.setText(placeholder);
+        textField.setForeground(Color.GRAY);
+        textField.addFocusListener(f);
     }
 }
