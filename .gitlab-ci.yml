@@ -8,15 +8,8 @@ variables:
   MAVEN_CLI_OPTS: "--batch-mode"
   MAVEN_OPTS: "-Dmaven.repo.local=.m2/repository"
   SONAR_TOKEN: fb911861a0ff4db3bc1b0eaf1a079d2104dae04c
-  SONAR_HOST_URL: http://84.237.50.237:9000/
+  SONAR_HOST_URL: http://84.237.50.237:9000
   
-sonareqube-check:
-  script:
-    - mvn sonar:sonar -Dsonar.host.url=$SONAR_HOST_URL -Dsonar.token=$SONAR_TOKEN
-  allow_failure: true
-  only:
-    - master
-
 cache:
   paths:
     - .m2/repository/
@@ -31,3 +24,10 @@ test:
   stage: test
   script:
     - mvn $MAVEN_CLI_OPTS test
+    
+sonareqube-check:
+  script:
+    - mvn sonar:sonar -Dsonar.projectKey=ru.nsu.wallpaper_search:wallpaper_search -Dsonar.host.url=$SONAR_HOST_URL -Dsonar.login=$SONAR_TOKEN
+  allow_failure: true
+  only:
+    - master
