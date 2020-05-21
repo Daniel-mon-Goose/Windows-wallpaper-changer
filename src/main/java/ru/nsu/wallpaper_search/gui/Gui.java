@@ -7,16 +7,16 @@ import java.awt.event.ActionListener;
 public class Gui extends JFrame {
 
     private JPanel contentPane, prefPane, queryPane, resultsPane;
-    private JComboBox widthBox, heightBox;
+    private JComboBox<Integer> widthBox, heightBox;
     private JScrollPane pictures;
-    private JLabel width, height;
+    private JLabel widthLabel, heightLabel;
     private JTextField queryField;
     private JButton searchButton;
     private int viewWidth, viewHeight;
 
     public Gui() {
         setContentPane(contentPane);
-        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
         setTitle("Wallpaper search");
 
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -25,7 +25,19 @@ public class Gui extends JFrame {
         this.setPreferredSize(new Dimension(viewWidth, viewHeight));
         this.setResizable(false);
 
-    //    queryField.setMaximumSize(new Dimension((int)(viewWidth * 0.2), 10));
-        resultsPane.setPreferredSize(new Dimension((int)viewWidth, (int)(viewHeight * 0.5)));
+        resultsPane.setPreferredSize(new Dimension(viewWidth, (int)(viewHeight * 0.5)));
+
+        widthBox.addItem((int)screenSize.getWidth());
+        heightBox.addItem((int)screenSize.getHeight());
+        int[] widthItems = {1920, 1366, 1536};
+        int[] heightItems = {1080, 768, 864};
+        for (int widthItem : widthItems) {
+            if (!(widthItem == (int)screenSize.getWidth())) widthBox.addItem(widthItem);
+        }
+        for (int heightItem : heightItems) {
+            if (!(heightItem == (int)screenSize.getHeight())) {
+                heightBox.addItem(heightItem);
+            }
+        }
     }
 }
