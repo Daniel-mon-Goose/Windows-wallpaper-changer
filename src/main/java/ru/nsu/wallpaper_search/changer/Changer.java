@@ -1,32 +1,31 @@
 package ru.nsu.wallpaper_search.changer;
-
-import com.sun.jna.Native;
-import com.sun.jna.platform.win32.WinDef;
-import com.sun.jna.win32.StdCallLibrary;
-import com.sun.jna.win32.W32APIFunctionMapper;
-import com.sun.jna.win32.W32APITypeMapper;
-
-import java.util.Map;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.nio.file.FileSystemException;
+import java.nio.file.Paths;
+import java.util.Objects;
 
 public class Changer {
-    public static void changeDesktopImage(String path) {
-        SPI.INSTANCE.SystemParametersInfo(
-                new WinDef.UINT_PTR(SPI.SPI_SETDESKWALLPAPER),
-                new WinDef.UINT_PTR(0),
-                path,
-                new WinDef.UINT_PTR(SPI.SPIF_UPDATEINIFILE | SPI.SPIF_SENDWININICHANGE));
-    }
+    private static final String SCRIPTPATH = "ru/nsu/wallpaper_search/changer/change.ps1";
+    private static final String CMDTEMPLATE = "cmd /c powershell -ExecutionPolicy Unrestricted -File %s %s";
 
-    public interface SPI extends StdCallLibrary {
-        long SPI_SETDESKWALLPAPER = 20;
-        long SPIF_UPDATEINIFILE = 0x01;
-        long SPIF_SENDWININICHANGE = 0x02;
+    public static void changeDesktopImage(String path) throws FileSystemException {
+        URI powershellURI;
+        try {
+            powershellURI = Objects.requireNonNull(Changer.class.getClassLoader()
+                    .getResource(SCRIPTPATH)).toURI();
+        } catch (URISyntaxException | NullPointerException e) {
+            throw new FileSystemException(SCRIPTPATH);
+        }
+        var powershellFile = Paths.get(powershellURI).toFile();
+        var powershellPath = powershellFile.getAbsolutePath();
 
-        SPI INSTANCE = Native.load("user32", SPI.class, Map.of(OPTION_TYPE_MAPPER, W32APITypeMapper.UNICODE,
-                OPTION_FUNCTION_MAPPER, W32APIFunctionMapper.UNICODE));
-
-        void SystemParametersInfo(WinDef.UINT_PTR uiAction, WinDef.UINT_PTR uiParam,
-                                  String pvParam, WinDef.UINT_PTR fWinIni
-        );
+        String cmd = String.format(CMDTEMPLATE, powershellPath, path);
+        try {
+            Runtime.getRuntime().exec(cmd);
+        } catch (IOException e) {
+            throw new FileSystemException(path);
+        }
     }
 }
