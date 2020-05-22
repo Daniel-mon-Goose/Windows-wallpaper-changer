@@ -20,6 +20,13 @@ public class Gui extends JFrame {
     private JComboBox<Integer> heightBox;
     private JTextField queryField;
     private JButton searchButton;
+    private JButton button1;
+    private JButton button2;
+    private JButton button3;
+    private JButton button4;
+    private JButton button5;
+    private JButton button6;
+    private JPanel buttonPane;
     private JScrollPane resultsPane;
 
     private int paneWidth;
@@ -42,11 +49,14 @@ public class Gui extends JFrame {
 
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         paneWidth = (int) (screenSize.getWidth() * 0.3);
-        paneHeight = (int) (screenSize.getHeight() * 0.21);
-        setPreferredSize(new Dimension(paneWidth, paneHeight));
-        prefPane.setPreferredSize(new Dimension(paneWidth, (int)(paneHeight * 0.7)));
-        queryPane.setPreferredSize(new Dimension(paneWidth, (int)(paneHeight * 0.3)));
+        paneHeight = (int) (screenSize.getHeight() * 0.4);
+        setPreferredSize(new Dimension(paneWidth + 100, paneHeight));
+        prefPane.setPreferredSize(new Dimension(paneWidth, (int)(paneHeight * 0.2)));
+        buttonPane.setPreferredSize(new Dimension(paneWidth, (int)(paneHeight * 0.7)));
+        queryPane.setPreferredSize(new Dimension(paneWidth, (int)(paneHeight * 0.1)));
         setResizable(false);
+
+        setButtonsDesign();
 
         widthBox.addItem((int) screenSize.getWidth());
         heightBox.addItem((int) screenSize.getHeight());
@@ -82,7 +92,7 @@ public class Gui extends JFrame {
 
     public void resizeWindow() {
         setResizable(true);
-        resize(new Dimension(paneWidth, paneHeight + resultPaneHeight + 30));
+        resize(new Dimension(paneWidth + 100, paneHeight + resultPaneHeight + 30));
         resultsPane.setPreferredSize(new Dimension(paneWidth, resultPaneHeight));
         galleryPane.setPreferredSize(new Dimension(galleryWidth, galleryHeight));
         setResizable(false);
@@ -101,10 +111,16 @@ public class Gui extends JFrame {
 
         resultsPane = new JScrollPane(galleryPane);
         SpringLayout layout = new SpringLayout();
+
         setLayout(layout);
-        layout.putConstraint(SpringLayout.SOUTH, resultsPane, 0, SpringLayout.SOUTH, contentPane);
+        layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, prefPane, 0, SpringLayout.HORIZONTAL_CENTER, contentPane);
+        layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, buttonPane, 0, SpringLayout.HORIZONTAL_CENTER, prefPane);
+        layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, queryPane, 0, SpringLayout.HORIZONTAL_CENTER, buttonPane);
+        layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, resultsPane, 0, SpringLayout.HORIZONTAL_CENTER, queryPane);
         layout.putConstraint(SpringLayout.NORTH, prefPane, 0, SpringLayout.NORTH, contentPane);
-        layout.putConstraint(SpringLayout.NORTH, queryPane, 0, SpringLayout.SOUTH, prefPane);
+        layout.putConstraint(SpringLayout.NORTH, buttonPane, 0, SpringLayout.SOUTH, prefPane);
+        layout.putConstraint(SpringLayout.NORTH, queryPane, 0, SpringLayout.SOUTH, buttonPane);
+        layout.putConstraint(SpringLayout.NORTH, resultsPane, 0, SpringLayout.SOUTH, queryPane);
         contentPane.add(resultsPane, layout);
 
         resultsPane.setVisible(true);
@@ -167,6 +183,20 @@ public class Gui extends JFrame {
             }
         }
         return null;
+    }
+
+    private void setButtonSize(JButton button, int width, int height) {
+        button.setPreferredSize(new Dimension(width, height));
+    }
+
+    private void setButtonsDesign() {
+        setButtonSize(button1, (int)(paneWidth * 0.25), (int)(paneHeight * 0.3));
+        setButtonSize(button2, (int)(paneWidth * 0.25), (int)(paneHeight * 0.3));
+        setButtonSize(button3, (int)(paneWidth * 0.25), (int)(paneHeight * 0.3));
+        setButtonSize(button4, (int)(paneWidth * 0.25), (int)(paneHeight * 0.3));
+        setButtonSize(button5, (int)(paneWidth * 0.25), (int)(paneHeight * 0.3));
+        setButtonSize(button6, (int)(paneWidth * 0.25), (int)(paneHeight * 0.3));
+        // TODO: заменить кнопки на JPanel с интерактивными картинками (отрисовка и взаимодействие) такие же как в ScrollPane
     }
 
 }
