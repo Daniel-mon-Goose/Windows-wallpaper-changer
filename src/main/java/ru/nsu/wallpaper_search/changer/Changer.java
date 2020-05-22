@@ -8,7 +8,6 @@ import java.util.Objects;
 
 public class Changer {
     private static final String SCRIPTPATH = "ru/nsu/wallpaper_search/changer/change.ps1";
-    private static final String CMDTEMPLATE = "cmd /c powershell -ExecutionPolicy Unrestricted -File %s %s";
 
     private Changer() {
         throw new IllegalStateException("Utility class");
@@ -24,10 +23,10 @@ public class Changer {
         }
         var powershellFile = Paths.get(powershellURI).toFile();
         var powershellPath = powershellFile.getAbsolutePath();
-
-        String cmd = String.format(CMDTEMPLATE, powershellPath, path);
         try {
-            Runtime.getRuntime().exec(cmd);
+            var pb = new ProcessBuilder();
+            pb.command("cmd", "/c", "powershell", "-ExecutionPolicy", "Unrestricted", "-File", powershellPath, path);
+            pb.start();
         } catch (IOException e) {
             throw new FileSystemException(path);
         }
