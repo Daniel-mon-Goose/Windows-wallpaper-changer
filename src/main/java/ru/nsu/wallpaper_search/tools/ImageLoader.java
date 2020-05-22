@@ -9,9 +9,9 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 
 public class ImageLoader {
-    private static final String ALTERNATEPATH = "C:/Users/%s/WallpaperSearcher/found.jpg";
-    private static final String PATH = "C:/Users/%s/found.jpg";
     private static final String FOLDER = "C:/Users/%s/WallpaperSearcher";
+    private static final String ALTERNATEFOLDER = "C:/Users/%s/";
+    private static final String PICNAME = "found.jpg";
 
     private ImageLoader() {
         throw new IllegalStateException("Utility class");
@@ -26,9 +26,9 @@ public class ImageLoader {
             if (!Files.exists(Paths.get(datPath))) {
                 Files.createDirectory(Paths.get(datPath));
             }
-            datPath = ALTERNATEPATH;
-        } catch (IOException ignored) {
-            datPath = PATH;
+            datPath = FOLDER + "/" + PICNAME;
+        } catch (IOException e) {
+            datPath = ALTERNATEFOLDER + "/" + PICNAME;
         }
 
         datPath = String.format(datPath, user);
