@@ -16,9 +16,11 @@ public class Gui extends JFrame {
     private JButton searchButton;
     private JScrollPane resultsPane;
 
-    private int startWidth, startHeight, showResultHeight;
+    private int width, height, resultPaneHeight, galleryWidth, galleryHeight;
     private int cellSize;
-    private int spaceSize;
+    private int imagesNum;
+    private static final int SPACE_SIZE = 10;
+    private static final int IMAGES_IN_ROW = 5;
     private BufferedImage gallery;
 
     public JTextField getQueryField() {
@@ -32,10 +34,10 @@ public class Gui extends JFrame {
         setTitle("Wallpaper search");
 
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        startWidth = (int) (screenSize.getWidth() * 0.3);
-        startHeight = (int) (screenSize.getHeight() * 0.2);
-        setPreferredSize(new Dimension(startWidth, startHeight));
-        prefPane.setPreferredSize(new Dimension(startWidth, (int)(startHeight * 0.7)));
+        width = (int) (screenSize.getWidth() * 0.3);
+        height = (int) (screenSize.getHeight() * 0.2);
+        setPreferredSize(new Dimension(width, height));
+        prefPane.setPreferredSize(new Dimension(width, (int)(height * 0.7)));
         setResizable(false);
 
         widthBox.addItem((int) screenSize.getWidth());
@@ -78,15 +80,14 @@ public class Gui extends JFrame {
 
     public void resizeWindow() {
         setResizable(true);
-        showResultHeight = startHeight * 3 - 48;
-        resize(new Dimension(startWidth, showResultHeight));
-        prefPane.setPreferredSize(new Dimension(startWidth, (int)(showResultHeight * 0.4)));
+        resize(new Dimension(width, height + resultPaneHeight));
+        resultsPane.setPreferredSize(new Dimension(width, resultPaneHeight));
+        galleryPane.setPreferredSize(new Dimension(galleryWidth, galleryHeight));
         setResizable(false);
     }
 
 
     public void addResultsPane() {
-        resizeWindow();
         galleryPane = new JPanel() {
             @Override
             public void paintComponent(Graphics g) {
@@ -106,17 +107,20 @@ public class Gui extends JFrame {
 
         resultsPane.setVisible(true);
         galleryPane.setVisible(true);
-        resultsPane.setPreferredSize(new Dimension(startWidth, (int) (showResultHeight * 0.5)));
-        galleryPane.setPreferredSize(new Dimension(startWidth-76, (int) (showResultHeight * 0.8)));
 
-        cellSize = 80;
-        spaceSize = 10;
-
+        galleryWidth = width - 2 * SPACE_SIZE;
+        cellSize = galleryWidth / IMAGES_IN_ROW - 2 * SPACE_SIZE;
+        int rowNum = imagesNum / IMAGES_IN_ROW;
+        if (imagesNum % IMAGES_IN_ROW != 0) rowNum++;
+        galleryHeight = (cellSize + 2 * SPACE_SIZE) * rowNum;
+        resultPaneHeight = cellSize + 2 * SPACE_SIZE;
+        resizeWindow();
     }
 
     public void drawImages(ArrayList<BufferedImage> images) {
+        imagesNum = images.size();
         addResultsPane();
-        gallery = new BufferedImage(startWidth, showResultHeight, BufferedImage.TYPE_INT_RGB);
+        gallery = new BufferedImage(galleryWidth, galleryHeight, BufferedImage.TYPE_INT_RGB);
 
         Graphics2D graphics = gallery.createGraphics();
         graphics.setPaint(Color.PINK);
@@ -124,13 +128,13 @@ public class Gui extends JFrame {
         int x = 0;
         int y = 0;
         for (int i = 0; i < images.size(); i++) {
-            if (i % 5 == 0 && i != 0) {
-                y += (cellSize + spaceSize * 2);
+            if (i % IMAGES_IN_ROW == 0 && i != 0) {
+                y += (cellSize + SPACE_SIZE * 2);
                 x = 0;
             }
             Image image = images.get(i);
-            graphics.drawImage(image, spaceSize + x, spaceSize + y, cellSize, cellSize, null);
-            x += (cellSize + spaceSize * 2);
+            graphics.drawImage(image, SPACE_SIZE + x, SPACE_SIZE + y, cellSize, cellSize, null);
+            x += (cellSize + SPACE_SIZE * 2);
         }
         repaint();
     }
