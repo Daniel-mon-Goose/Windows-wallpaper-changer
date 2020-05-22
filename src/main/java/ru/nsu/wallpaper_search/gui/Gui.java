@@ -33,6 +33,7 @@ public class Gui extends JFrame {
     private int paneHeight;
     private int resultPaneHeight;
     private int galleryWidth;
+    private int windowWidth;
     private int galleryHeight;
     private int cellSize;
     private int imagesNum;
@@ -48,12 +49,13 @@ public class Gui extends JFrame {
         setTitle("Wallpaper search");
 
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        windowWidth = (int) (screenSize.getWidth() * 0.5);
         paneWidth = (int) (screenSize.getWidth() * 0.3);
         paneHeight = (int) (screenSize.getHeight() * 0.4);
-        setPreferredSize(new Dimension(paneWidth + 100, paneHeight));
+        setPreferredSize(new Dimension(windowWidth + 100, paneHeight));
         prefPane.setPreferredSize(new Dimension(paneWidth, (int)(paneHeight * 0.2)));
-        buttonPane.setPreferredSize(new Dimension(paneWidth, (int)(paneHeight * 0.7)));
-        queryPane.setPreferredSize(new Dimension(paneWidth, (int)(paneHeight * 0.1)));
+        buttonPane.setPreferredSize(new Dimension(paneWidth, (int)(paneHeight * 0.6)));
+        queryPane.setPreferredSize(new Dimension(paneWidth, (int)(paneHeight * 0.2)));
         setResizable(false);
 
         setButtonsDesign();
@@ -92,9 +94,9 @@ public class Gui extends JFrame {
 
     public void resizeWindow() {
         setResizable(true);
-        resize(new Dimension(paneWidth + 100, paneHeight + resultPaneHeight + 30));
-        resultsPane.setPreferredSize(new Dimension(paneWidth, resultPaneHeight));
-        galleryPane.setPreferredSize(new Dimension(galleryWidth, galleryHeight));
+        resize(new Dimension(windowWidth + 100, paneHeight + resultPaneHeight + 30));
+        resultsPane.setPreferredSize(new Dimension(windowWidth, resultPaneHeight));
+        galleryPane.setPreferredSize(new Dimension(windowWidth, galleryHeight));
         setResizable(false);
     }
 
@@ -126,12 +128,12 @@ public class Gui extends JFrame {
         resultsPane.setVisible(true);
         galleryPane.setVisible(true);
 
-        galleryWidth = paneWidth - 2 * SPACE_SIZE;
+        galleryWidth = windowWidth;
         cellSize = galleryWidth / IMAGES_IN_ROW - 2 * SPACE_SIZE;
         int rowNum = imagesNum / IMAGES_IN_ROW;
         if (imagesNum % IMAGES_IN_ROW != 0) rowNum++;
         galleryHeight = (cellSize + 2 * SPACE_SIZE) * rowNum;
-        resultPaneHeight = cellSize + 2 * SPACE_SIZE;
+        resultPaneHeight = 2 * cellSize + 4 * SPACE_SIZE;
         resizeWindow();
     }
 
