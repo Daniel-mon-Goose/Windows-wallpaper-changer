@@ -10,6 +10,10 @@ public class Changer {
     private static final String SCRIPTPATH = "ru/nsu/wallpaper_search/changer/change.ps1";
     private static final String CMDTEMPLATE = "cmd /c powershell -ExecutionPolicy Unrestricted -File %s %s";
 
+    private Changer() {
+        throw new IllegalStateException("Utility class");
+    }
+
     public static void changeDesktopImage(String path) throws FileSystemException {
         URI powershellURI;
         try {
