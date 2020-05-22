@@ -5,7 +5,6 @@ import com.github.frimtec.libraries.jpse.PowerShellExecutor;
 import java.io.File;
 import java.nio.file.FileSystemException;
 import java.util.Objects;
-import java.util.regex.Pattern;
 
 public class Changer {
     private static final String SCRIPTPATH = "ru/nsu/wallpaper_search/changer/change.ps1";
