@@ -4,8 +4,12 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusListener;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Gui extends JFrame {
 
@@ -22,10 +26,7 @@ public class Gui extends JFrame {
     private static final int SPACE_SIZE = 10;
     private static final int IMAGES_IN_ROW = 5;
     private BufferedImage gallery;
-
-    public JTextField getQueryField() {
-        return queryField;
-    }
+    private Map<BufferedImage, Coords> imageCoords = new HashMap<>();
 
     public Gui() {
         add(contentPane);
@@ -56,14 +57,16 @@ public class Gui extends JFrame {
         }
     }
 
-    public void addSearshListener(ActionListener l) {
-        searchButton.addActionListener(l);
+    public Map<BufferedImage, Coords> getImageCoords() {
+        return imageCoords;
     }
 
-    public void createPlaceholder(String placeholder, FocusListener f) {
-        queryField.setText(placeholder);
-        queryField.setForeground(Color.GRAY);
-        queryField.addFocusListener(f);
+    public JTextField getQueryField() {
+        return queryField;
+    }
+
+    public String getText(JTextField field) {
+        return field.getText();
     }
 
     public void setText(JTextField field, String text) {
@@ -72,10 +75,6 @@ public class Gui extends JFrame {
 
     public void setForeground(JTextField field, Color color) {
         field.setForeground(color);
-    }
-
-    public String getText(JTextField field) {
-        return field.getText();
     }
 
     public void resizeWindow() {
@@ -132,10 +131,26 @@ public class Gui extends JFrame {
                 y += (cellSize + SPACE_SIZE * 2);
                 x = 0;
             }
-            Image image = images.get(i);
+            BufferedImage image = images.get(i);
             graphics.drawImage(image, SPACE_SIZE + x, SPACE_SIZE + y, cellSize, cellSize, null);
+            imageCoords.put(image, new Coords(SPACE_SIZE + x, SPACE_SIZE + y));
             x += (cellSize + SPACE_SIZE * 2);
         }
         repaint();
     }
+
+    public void addSearshListener(ActionListener l) {
+        searchButton.addActionListener(l);
+    }
+
+    public void createPlaceholder(String placeholder, FocusListener f) {
+        queryField.setText(placeholder);
+        queryField.setForeground(Color.GRAY);
+        queryField.addFocusListener(f);
+    }
+
+    public void addViewPictureListener(MouseListener l) {
+        galleryPane.addMouseListener(l);
+    }
+
 }
