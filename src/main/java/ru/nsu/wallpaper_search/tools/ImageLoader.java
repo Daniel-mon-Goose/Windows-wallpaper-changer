@@ -35,7 +35,7 @@ public class ImageLoader {
         for (var link: links.getOriginals()) {
             try (var netStream = new URL(link).openStream()) {
                 flag = Files.copy(netStream, Paths.get(datPath), StandardCopyOption.REPLACE_EXISTING);
-            } catch (IOException ignored) { }
+            } catch (IOException e) { System.out.println(e.getMessage()); }
 
             if (flag != -1) {
                 return datPath;
