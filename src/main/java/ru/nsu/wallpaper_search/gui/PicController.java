@@ -18,9 +18,8 @@ public class PicController {
         view.addCancelButtonActionListener(this::cancel);
     }
 
-    // TODO: задействовать установщика обоев
     private void ok(ActionEvent actionEvent) {
-
+        // TODO: задействовать установщика обоев
     }
 
     private void cancel(ActionEvent actionEvent) { view.closeWindow(); }

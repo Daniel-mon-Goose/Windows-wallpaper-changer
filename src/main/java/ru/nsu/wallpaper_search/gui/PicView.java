@@ -7,8 +7,10 @@ import java.awt.image.BufferedImage;
 
 public class PicView extends JFrame {
     private JPanel contentPane;
-    private JButton setButton, cancelButton;
-    private int picWidth, picHeight;
+    private JButton setButton;
+    private JButton cancelButton;
+    private int picWidth;
+    private int picHeight;
 
     public PicView(BufferedImage pic) {
         contentPane = new JPanel();
