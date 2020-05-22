@@ -4,6 +4,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.util.ArrayList;
 
 public class GuiController {
     private Gui view;
@@ -40,8 +41,12 @@ public class GuiController {
         notifier.run();
     }
 
-    private String getRequest() {
+    public String getRequest() {
         return view.getText(view.getQueryField());
+    }
+
+    public void drawImages(ArrayList<Image> images) {
+        view.drawImages(images);
     }
 
 }
