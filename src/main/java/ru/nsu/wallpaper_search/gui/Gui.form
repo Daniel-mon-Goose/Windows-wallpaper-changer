@@ -11,10 +11,17 @@
       <grid id="11e04" binding="prefPane" layout-manager="GridLayoutManager" row-count="2" column-count="7" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
         <margin top="0" left="0" bottom="0" right="0"/>
         <constraints>
-          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false">
+            <minimum-size width="200" height="175"/>
+            <maximum-size width="-1" height="300"/>
+          </grid>
         </constraints>
-        <properties/>
-        <border type="line" title="Preferences" title-justification="2"/>
+        <properties>
+          <foreground color="-15245498"/>
+        </properties>
+        <border type="line" title="Preferences" title-justification="2">
+          <color color="-15245498"/>
+        </border>
         <children>
           <component id="81785" class="javax.swing.JComboBox" binding="widthBox">
             <constraints>
@@ -22,7 +29,10 @@
                 <minimum-size width="100" height="-1"/>
               </grid>
             </constraints>
-            <properties/>
+            <properties>
+              <background color="-1"/>
+              <focusable value="true"/>
+            </properties>
           </component>
           <vspacer id="72814">
             <constraints>
@@ -35,13 +45,18 @@
                 <minimum-size width="100" height="-1"/>
               </grid>
             </constraints>
-            <properties/>
+            <properties>
+              <background color="-1"/>
+              <focusable value="true"/>
+            </properties>
           </component>
           <component id="d96a6" class="javax.swing.JLabel" binding="widthLabel">
             <constraints>
               <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
+              <font style="2"/>
+              <foreground color="-15245498"/>
               <text value="width"/>
             </properties>
           </component>
@@ -50,6 +65,8 @@
               <grid row="1" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
+              <font style="2"/>
+              <foreground color="-15245498"/>
               <text value="height"/>
             </properties>
           </component>
@@ -70,7 +87,7 @@
           </hspacer>
           <vspacer id="11843">
             <constraints>
-              <grid row="0" column="3" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+              <grid row="0" column="5" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
             </constraints>
           </vspacer>
         </children>
@@ -79,11 +96,14 @@
         <margin top="0" left="0" bottom="0" right="0"/>
         <constraints>
           <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false">
-            <maximum-size width="-1" height="50"/>
+            <minimum-size width="-1" height="50"/>
+            <maximum-size width="-1" height="100"/>
           </grid>
         </constraints>
         <properties/>
-        <border type="line" title-justification="2"/>
+        <border type="line" title-justification="2">
+          <color color="-15245498"/>
+        </border>
         <children>
           <component id="717f8" class="javax.swing.JTextField" binding="queryField">
             <constraints>
@@ -91,13 +111,20 @@
                 <preferred-size width="150" height="-1"/>
               </grid>
             </constraints>
-            <properties/>
+            <properties>
+              <background color="-1"/>
+              <focusable value="true"/>
+            </properties>
           </component>
           <component id="6001e" class="javax.swing.JButton" binding="searchButton" default-binding="true">
             <constraints>
               <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
+              <background color="-15245498"/>
+              <font name="Dialog" style="2"/>
+              <foreground color="-1"/>
+              <hideActionText value="false"/>
               <text value="Search"/>
             </properties>
           </component>
