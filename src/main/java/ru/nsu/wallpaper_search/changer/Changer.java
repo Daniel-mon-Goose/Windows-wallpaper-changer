@@ -19,7 +19,7 @@ public class Changer {
                 .getResource(SCRIPTPATH)).getPath();
         powershellPath = String.join(File.separator, powershellPath.split("/"));
         if (powershellPath.startsWith(File.separator)) {
-            powershellPath = powershellPath.replaceFirst(Pattern.quote(File.separator), "");
+            powershellPath = powershellPath.substring(1);
         }
 
         try {
