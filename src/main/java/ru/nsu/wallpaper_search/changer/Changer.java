@@ -1,10 +1,11 @@
 package ru.nsu.wallpaper_search.changer;
-import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
+
+import com.github.frimtec.libraries.jpse.PowerShellExecutor;
+
+import java.io.File;
 import java.nio.file.FileSystemException;
-import java.nio.file.Paths;
 import java.util.Objects;
+import java.util.regex.Pattern;
 
 public class Changer {
     private static final String SCRIPTPATH = "ru/nsu/wallpaper_search/changer/change.ps1";
@@ -14,20 +15,18 @@ public class Changer {
     }
 
     public static void changeDesktopImage(String path) throws FileSystemException {
-        URI powershellURI;
-        try {
-            powershellURI = Objects.requireNonNull(Changer.class.getClassLoader()
-                    .getResource(SCRIPTPATH)).toURI();
-        } catch (URISyntaxException | NullPointerException e) {
-            throw new FileSystemException(SCRIPTPATH);
+        var powershellPath = Objects.requireNonNull(Changer.class.getClassLoader()
+                .getResource(SCRIPTPATH)).getPath();
+        powershellPath = String.join(File.separator, powershellPath.split("/"));
+        if (powershellPath.startsWith(File.separator)) {
+            powershellPath = powershellPath.replaceFirst(Pattern.quote(File.separator), "");
         }
-        var powershellFile = Paths.get(powershellURI).toFile();
-        var powershellPath = powershellFile.getAbsolutePath();
+
         try {
-            var pb = new ProcessBuilder();
-            pb.command("cmd", "/c", "powershell", "-ExecutionPolicy", "Unrestricted", "-File", powershellPath, path);
-            pb.start();
-        } catch (IOException e) {
+            PowerShellExecutor executor = PowerShellExecutor.instance();
+            executor.execute("Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope CurrentUser");
+            executor.execute(powershellPath + " " + path);
+        } catch (Exception e) {
             throw new FileSystemException(path);
         }
     }
