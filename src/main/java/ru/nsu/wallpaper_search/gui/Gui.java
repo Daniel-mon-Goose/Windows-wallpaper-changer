@@ -5,7 +5,6 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusListener;
 import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -13,14 +12,21 @@ import java.util.Map;
 
 public class Gui extends JFrame {
 
-    private JPanel contentPane, prefPane, queryPane, galleryPane;
-    private JComboBox<Integer> widthBox, heightBox;
-    private JLabel widthLabel, heightLabel;
+    private JPanel contentPane;
+    private JPanel prefPane;
+    private JPanel queryPane;
+    private JPanel galleryPane;
+    private JComboBox<Integer> widthBox;
+    private JComboBox<Integer> heightBox;
     private JTextField queryField;
     private JButton searchButton;
     private JScrollPane resultsPane;
 
-    private int width, height, resultPaneHeight, galleryWidth, galleryHeight;
+    private int paneWidth;
+    private int paneHeight;
+    private int resultPaneHeight;
+    private int galleryWidth;
+    private int galleryHeight;
     private int cellSize;
     private int imagesNum;
     private static final int SPACE_SIZE = 10;
@@ -35,10 +41,10 @@ public class Gui extends JFrame {
         setTitle("Wallpaper search");
 
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        width = (int) (screenSize.getWidth() * 0.3);
-        height = (int) (screenSize.getHeight() * 0.2);
-        setPreferredSize(new Dimension(width, height));
-        prefPane.setPreferredSize(new Dimension(width, (int)(height * 0.7)));
+        paneWidth = (int) (screenSize.getWidth() * 0.3);
+        paneHeight = (int) (screenSize.getHeight() * 0.2);
+        setPreferredSize(new Dimension(paneWidth, paneHeight));
+        prefPane.setPreferredSize(new Dimension(paneWidth, (int)(paneHeight * 0.7)));
         setResizable(false);
 
         widthBox.addItem((int) screenSize.getWidth());
@@ -46,12 +52,12 @@ public class Gui extends JFrame {
         int[] widthItems = {1920, 1366, 1536};
         int[] heightItems = {1080, 768, 864};
         for (int widthItem : widthItems) {
-            if (!(widthItem == (int) screenSize.getWidth())) {
+            if (widthItem != (int) screenSize.getWidth()) {
                 widthBox.addItem(widthItem);
             }
         }
         for (int heightItem : heightItems) {
-            if (!(heightItem == (int) screenSize.getHeight())) {
+            if (heightItem != (int) screenSize.getHeight()) {
                 heightBox.addItem(heightItem);
             }
         }
@@ -79,8 +85,8 @@ public class Gui extends JFrame {
 
     public void resizeWindow() {
         setResizable(true);
-        resize(new Dimension(width, height + resultPaneHeight));
-        resultsPane.setPreferredSize(new Dimension(width, resultPaneHeight));
+        resize(new Dimension(paneWidth, paneHeight + resultPaneHeight));
+        resultsPane.setPreferredSize(new Dimension(paneWidth, resultPaneHeight));
         galleryPane.setPreferredSize(new Dimension(galleryWidth, galleryHeight));
         setResizable(false);
     }
@@ -107,7 +113,7 @@ public class Gui extends JFrame {
         resultsPane.setVisible(true);
         galleryPane.setVisible(true);
 
-        galleryWidth = width - 2 * SPACE_SIZE;
+        galleryWidth = paneWidth - 2 * SPACE_SIZE;
         cellSize = galleryWidth / IMAGES_IN_ROW - 2 * SPACE_SIZE;
         int rowNum = imagesNum / IMAGES_IN_ROW;
         if (imagesNum % IMAGES_IN_ROW != 0) rowNum++;

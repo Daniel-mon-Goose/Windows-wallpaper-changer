@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class GuiController {
     private Gui view;
     private Runnable notifier;
-    private static final String placeholder = "Enter your request.....";
+    private static final String placeholder = "Enter your request...";
 
     public GuiController(Runnable notifier) {
         this.notifier = notifier;
@@ -53,27 +53,27 @@ public class GuiController {
 
         @Override
         public void mouseClicked(MouseEvent e) {
-
+            // will be implemented later...
         }
 
         @Override
         public void mousePressed(MouseEvent e) {
-
+            // will be implemented later...
         }
 
         @Override
         public void mouseReleased(MouseEvent e) {
-
+            // will be implemented later...
         }
 
         @Override
         public void mouseEntered(MouseEvent e) {
-
+            // will be implemented later...
         }
 
         @Override
         public void mouseExited(MouseEvent e) {
-
+            // will be implemented later...
         }
     }
 
