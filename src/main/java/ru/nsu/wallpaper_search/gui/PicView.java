@@ -19,7 +19,7 @@ public class PicView extends JFrame {
         if (picWidth >= screenSize.getWidth() - 100 || picHeight >= screenSize.getHeight() - 100) {
             picWidth =  (int)(picWidth * 0.4);
             picHeight = (int)(picHeight * 0.4);
-        } 
+        }
 
         JPanel picPane = new JPanel() {
             @Override
@@ -32,7 +32,7 @@ public class PicView extends JFrame {
 
         setButton = new JButton();
         cancelButton = new JButton();
-        setButtonDesign(setButton, 100, 30, "OK");
+        setButtonDesign(setButton, 200, 30, "Set as wallpaper");
         setButtonDesign(cancelButton, 100, 30, "Cancel");
 
         contentPane.add(picPane);
@@ -44,9 +44,8 @@ public class PicView extends JFrame {
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setTitle("Wallpaper search");
 
-        this.setPreferredSize(new Dimension((int)(picWidth * 1.1), picHeight + 50));
+        this.setPreferredSize(new Dimension(picWidth + 10, picHeight + 50));
         this.setResizable(false);
-
     }
 
     private void setButtonDesign(JButton button, int width, int height, String text) {
