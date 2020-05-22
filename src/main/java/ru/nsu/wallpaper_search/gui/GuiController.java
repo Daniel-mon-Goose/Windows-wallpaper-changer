@@ -1,8 +1,11 @@
 package ru.nsu.wallpaper_search.gui;
 
+import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class GuiController {
@@ -53,27 +56,32 @@ public class GuiController {
 
         @Override
         public void mouseClicked(MouseEvent e) {
-            // will be implemented later...
+            if (e.getClickCount() == 2) {
+                BufferedImage img = view.getImage(new Coords(e.getX(), e.getY()));
+                if (img != null) {
+                    new PicController(img);
+                }
+            }
         }
 
         @Override
         public void mousePressed(MouseEvent e) {
-            // will be implemented later...
+
         }
 
         @Override
         public void mouseReleased(MouseEvent e) {
-            // will be implemented later...
+
         }
 
         @Override
         public void mouseEntered(MouseEvent e) {
-            // will be implemented later...
+
         }
 
         @Override
         public void mouseExited(MouseEvent e) {
-            // will be implemented later...
+
         }
     }
 

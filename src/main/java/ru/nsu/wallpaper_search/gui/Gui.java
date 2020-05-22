@@ -42,9 +42,10 @@ public class Gui extends JFrame {
 
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         paneWidth = (int) (screenSize.getWidth() * 0.3);
-        paneHeight = (int) (screenSize.getHeight() * 0.2);
+        paneHeight = (int) (screenSize.getHeight() * 0.21);
         setPreferredSize(new Dimension(paneWidth, paneHeight));
         prefPane.setPreferredSize(new Dimension(paneWidth, (int)(paneHeight * 0.7)));
+        queryPane.setPreferredSize(new Dimension(paneWidth, (int)(paneHeight * 0.3)));
         setResizable(false);
 
         widthBox.addItem((int) screenSize.getWidth());
@@ -61,10 +62,6 @@ public class Gui extends JFrame {
                 heightBox.addItem(heightItem);
             }
         }
-    }
-
-    public Map<BufferedImage, Coords> getImageCoords() {
-        return imageCoords;
     }
 
     public JTextField getQueryField() {
@@ -85,7 +82,7 @@ public class Gui extends JFrame {
 
     public void resizeWindow() {
         setResizable(true);
-        resize(new Dimension(paneWidth, paneHeight + resultPaneHeight));
+        resize(new Dimension(paneWidth, paneHeight + resultPaneHeight + 30));
         resultsPane.setPreferredSize(new Dimension(paneWidth, resultPaneHeight));
         galleryPane.setPreferredSize(new Dimension(galleryWidth, galleryHeight));
         setResizable(false);
@@ -157,6 +154,19 @@ public class Gui extends JFrame {
 
     public void addViewPictureListener(MouseListener l) {
         galleryPane.addMouseListener(l);
+    }
+
+    BufferedImage getImage(Coords coords) {
+        int x, y;
+        for(Map.Entry<BufferedImage, Coords> entry : imageCoords.entrySet()) {
+            x = entry.getValue().getX();
+            y = entry.getValue().getY();
+            if (x <= coords.getX() && coords.getX() <= x + cellSize &&
+                    y <= coords.getY() && coords.getY() <= y + cellSize) {
+                return entry.getKey();
+            }
+        }
+        return null;
     }
 
 }
