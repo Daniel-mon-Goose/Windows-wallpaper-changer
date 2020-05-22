@@ -43,7 +43,9 @@ public class Gui extends JFrame {
         int[] widthItems = {1920, 1366, 1536};
         int[] heightItems = {1080, 768, 864};
         for (int widthItem : widthItems) {
-            if (!(widthItem == (int) screenSize.getWidth())) widthBox.addItem(widthItem);
+            if (!(widthItem == (int) screenSize.getWidth())) {
+                widthBox.addItem(widthItem);
+            }
         }
         for (int heightItem : heightItems) {
             if (!(heightItem == (int) screenSize.getHeight())) {
@@ -76,7 +78,7 @@ public class Gui extends JFrame {
 
     public void resizeWindow() {
         setResizable(true);
-        showResultHeight = startHeight * 3 - 100;
+        showResultHeight = startHeight * 3 - 48;
         resize(new Dimension(startWidth, showResultHeight));
         prefPane.setPreferredSize(new Dimension(startWidth, (int)(showResultHeight * 0.4)));
         setResizable(false);
@@ -105,13 +107,31 @@ public class Gui extends JFrame {
         resultsPane.setVisible(true);
         galleryPane.setVisible(true);
         resultsPane.setPreferredSize(new Dimension(startWidth, (int) (showResultHeight * 0.5)));
-        galleryPane.setPreferredSize(new Dimension(startWidth-50, (int) (showResultHeight * 0.8)));
+        galleryPane.setPreferredSize(new Dimension(startWidth-76, (int) (showResultHeight * 0.8)));
 
-        cellSize = (int) (startWidth * 0.2);
-        spaceSize = (int) (startWidth * 0.06);
+        cellSize = 80;
+        spaceSize = 10;
+
     }
 
-    public void drawImages(ArrayList<Image> images) {
+    public void drawImages(ArrayList<BufferedImage> images) {
         addResultsPane();
+        gallery = new BufferedImage(startWidth, showResultHeight, BufferedImage.TYPE_INT_RGB);
+
+        Graphics2D graphics = gallery.createGraphics();
+        graphics.setPaint(Color.PINK);
+        graphics.fillRect(0, 0, gallery.getWidth(), gallery.getHeight());
+        int x = 0;
+        int y = 0;
+        for (int i = 0; i < images.size(); i++) {
+            if (i % 5 == 0 && i != 0) {
+                y += (cellSize + spaceSize * 2);
+                x = 0;
+            }
+            Image image = images.get(i);
+            graphics.drawImage(image, spaceSize + x, spaceSize + y, cellSize, cellSize, null);
+            x += (cellSize + spaceSize * 2);
+        }
+        repaint();
     }
 }
