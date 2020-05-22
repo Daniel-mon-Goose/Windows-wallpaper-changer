@@ -123,6 +123,12 @@
             <version>3.7.0.1746</version>
         </dependency>
 
+        <dependency>
+            <groupId>com.github.frimtec</groupId>
+            <artifactId>jpse</artifactId>
+            <version>0.1.0</version>
+        </dependency>
+
     </dependencies>
     
 </project>

@@ -1,7 +1,8 @@
 package ru.nsu.wallpaper_search.changer;
 
+import com.github.frimtec.libraries.jpse.PowerShellExecutor;
+
 import java.io.File;
-import java.io.IOException;
 import java.nio.file.FileSystemException;
 import java.util.Objects;
 import java.util.regex.Pattern;
@@ -22,10 +23,10 @@ public class Changer {
         }
 
         try {
-            var pb = new ProcessBuilder();
-            pb.command("cmd", "/c", "powershell", "-ExecutionPolicy", "Unrestricted", "-File", powershellPath, path);
-            pb.start();
-        } catch (IOException e) {
+            PowerShellExecutor executor = PowerShellExecutor.instance();
+            executor.execute("Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope CurrentUser");
+            executor.execute(powershellPath + " " + path);
+        } catch (Exception e) {
             throw new FileSystemException(path);
         }
     }
