@@ -1,24 +1,24 @@
 package ru.nsu.wallpaper_search.gui;
 
-import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 
 public class GuiController {
     private Gui view;
-    private Runnable notifier;
-    private static final String placeholder = "Enter your request...";
+    private Runnable searcher;
+    private Runnable changeWP;
+    private static final String PLACEHOLDER = "Enter your request...";
+    private PicController picController;
 
-    public GuiController(Runnable notifier) {
-        this.notifier = notifier;
+    public GuiController(Runnable searcher, Runnable changeWP) {
+        this.searcher = searcher;
+        this.changeWP = changeWP;
         view = new Gui();
         view.pack();
         view.setVisible(true);
-        view.createPlaceholder(placeholder, new FocusListener() {
+        view.createPlaceholder(PLACEHOLDER, new FocusListener() {
             @Override
             public void focusGained(FocusEvent e) {
                 if (view.getQueryField().getForeground() == Color.GRAY) {
@@ -31,16 +31,16 @@ public class GuiController {
             public void focusLost(FocusEvent e) {
                 if (view.getText(view.getQueryField()).isEmpty()) {
                     view.setForeground(view.getQueryField(), Color.GRAY);
-                    view.setText(view.getQueryField(), placeholder);
+                    view.setText(view.getQueryField(), PLACEHOLDER);
                 }
             }
         });
 
-        view.addSearshListener(this::notifyOnSearch);
+        view.addSearshListener(this::sendRequest);
     }
 
-    private void notifyOnSearch(ActionEvent e) {
-        notifier.run();
+    private void sendRequest(ActionEvent e) {
+        searcher.run();
     }
 
     public String getRequest() {
@@ -52,6 +52,10 @@ public class GuiController {
 
     public int getHeight() {
         return view.getHeight();
+    }
+
+    public BufferedImage getPickedImage() {
+        return picController.getPickedImage();
     }
 
     public void drawImages(ArrayList<BufferedImage> images) {
@@ -66,30 +70,23 @@ public class GuiController {
             if (e.getClickCount() == 2) {
                 BufferedImage img = view.getImage(new Coords(e.getX(), e.getY()));
                 if (img != null) {
-                    new PicController(img);
+                    view.setEnabled(false);
+                    picController = new PicController(img, changeWP, () -> view.setEnabled(true));
                 }
             }
         }
 
         @Override
-        public void mousePressed(MouseEvent e) {
-
-        }
+        public void mousePressed(MouseEvent e) {}
 
         @Override
-        public void mouseReleased(MouseEvent e) {
-
-        }
+        public void mouseReleased(MouseEvent e) {}
 
         @Override
-        public void mouseEntered(MouseEvent e) {
-
-        }
+        public void mouseEntered(MouseEvent e) {}
 
         @Override
-        public void mouseExited(MouseEvent e) {
-
-        }
+        public void mouseExited(MouseEvent e) {}
     }
 
 }
