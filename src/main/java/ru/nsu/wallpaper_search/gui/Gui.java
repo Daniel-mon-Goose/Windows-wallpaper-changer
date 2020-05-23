@@ -80,6 +80,14 @@ public class Gui extends JFrame {
         return queryField;
     }
 
+    public int getWidth() {
+        return (int) widthBox.getSelectedItem();
+    }
+
+    public int getHeight() {
+        return (int) heightBox.getSelectedItem();
+    }
+
     public String getText(JTextField field) {
         return field.getText();
     }

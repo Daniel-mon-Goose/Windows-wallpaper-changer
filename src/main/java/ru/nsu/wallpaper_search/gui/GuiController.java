@@ -46,6 +46,13 @@ public class GuiController {
     public String getRequest() {
         return view.getText(view.getQueryField());
     }
+    public int getWidth() {
+        return view.getWidth();
+    }
+
+    public int getHeight() {
+        return view.getHeight();
+    }
 
     public void drawImages(ArrayList<BufferedImage> images) {
         view.drawImages(images);
