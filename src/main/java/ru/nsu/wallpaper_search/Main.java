@@ -15,8 +15,8 @@ public class Main {
         ArrayList<BufferedImage> images = new ArrayList<>();
         for (int i = 0; i < 15; i++) {
             try {
-                images.add(ImageIO.read(new File("/home/sofiya/NSU/upprpo/cat.jpg")));
-                images.add(ImageIO.read(new File("/home/sofiya/NSU/upprpo/dog.jpg")));
+                images.add(ImageIO.read(new File("/home/alena/Desktop/cat.jpg")));
+                images.add(ImageIO.read(new File("/home/alena/Desktop/dog.jpg")));
             } catch (IOException e) {
                 e.printStackTrace();
             }

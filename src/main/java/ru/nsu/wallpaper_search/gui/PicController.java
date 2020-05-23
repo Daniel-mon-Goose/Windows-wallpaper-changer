@@ -6,14 +6,14 @@ import java.awt.image.BufferedImage;
 public class PicController {
     private PicView view;
     private Runnable changeWP;
-    private Runnable notifyOnClose;
+    Runnable notifyOnClose;
     private BufferedImage pickedImage;
 
     public PicController(BufferedImage pic, Runnable changeWP, Runnable notifyOnClose) {
         pickedImage = pic;
         this.changeWP = changeWP;
         this.notifyOnClose = notifyOnClose;
-        view = new PicView(pic);
+        view = new PicView(pic, notifyOnClose);
         view.pack();
         view.setVisible(true);
 
@@ -33,6 +33,6 @@ public class PicController {
 
     private void cancel(ActionEvent actionEvent) {
         notifyOnClose.run();
-        view.closeWindow(); }
-
+        view.closeWindow();
+    }
 }
