@@ -1,26 +1,18 @@
 package ru.nsu.wallpaper_search;
 
 import ru.nsu.wallpaper_search.gui.GuiController;
+import ru.nsu.wallpaper_search.tools.DataHandler;
 
-import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 
 public class Main {
     public static void main(String[] args) {
         GuiController g = new GuiController(()-> System.out.println("search"),
                                 ()-> System.out.println("change wallpapers"));
-        ArrayList<BufferedImage> images = new ArrayList<>();
-        for (int i = 0; i < 15; i++) {
-            try {
-                images.add(ImageIO.read(new File("/home/alena/Desktop/cat.jpg")));
-                images.add(ImageIO.read(new File("/home/alena/Desktop/dog.jpg")));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
+
+        ArrayList<BufferedImage> images = new DataHandler().findPics(g.getWidth(), g.getHeight(), g.getRequest());
+
         g.drawImages(images);
     }
 
