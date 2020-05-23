@@ -3,6 +3,7 @@ image: maven:3-jdk-11
 stages:
   - build
   - test
+  - jacoco_check
 
 variables:
   MAVEN_CLI_OPTS: "--batch-mode"
@@ -27,6 +28,7 @@ test:
     - mvn $MAVEN_CLI_OPTS test
     
 sonareqube-check:
+  stage: jacoco_check
   script:
     - mvn sonar:sonar -Dsonar.projectKey=ru.nsu.wallpaper_search:wallpaper_search -Dsonar.host.url=$SONAR_HOST_URL -Dsonar.login=$SONAR_TOKEN -Dsonar.core.codeCoveragePlugin=jacoco -Dsonar.jacoco.reportPath=/target/jacoco.exec -Dsonar.dynamicAnalysis=reuseReports -Dsonar.surefire.reportsPath=/target/test-reports
   allow_failure: true
