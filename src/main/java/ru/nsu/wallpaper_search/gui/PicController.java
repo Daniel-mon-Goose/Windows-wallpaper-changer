@@ -5,11 +5,14 @@ import java.awt.image.BufferedImage;
 
 public class PicController {
     private PicView view;
+    private Runnable changeWP;
+    private Runnable notifyOnClose;
+    private BufferedImage pickedImage;
 
-    public PicController(BufferedImage pic) {
-        // предполагается, что GuiController при двойном клике на изображение из списка
-        // дёргает конструктор PicController'a, передавая ему уже конвертированное в
-        // BufferedImage изображение
+    public PicController(BufferedImage pic, Runnable changeWP, Runnable notifyOnClose) {
+        pickedImage = pic;
+        this.changeWP = changeWP;
+        this.notifyOnClose = notifyOnClose;
         view = new PicView(pic);
         view.pack();
         view.setVisible(true);
@@ -18,10 +21,18 @@ public class PicController {
         view.addCancelButtonActionListener(this::cancel);
     }
 
-    private void ok(ActionEvent actionEvent) {
-        // TODO: задействовать установщика обоев
+    public BufferedImage getPickedImage() {
+        return pickedImage;
     }
 
-    private void cancel(ActionEvent actionEvent) { view.closeWindow(); }
+    private void ok(ActionEvent actionEvent) {
+        changeWP.run();
+        notifyOnClose.run();
+        view.closeWindow();
+    }
+
+    private void cancel(ActionEvent actionEvent) {
+        notifyOnClose.run();
+        view.closeWindow(); }
 
 }
