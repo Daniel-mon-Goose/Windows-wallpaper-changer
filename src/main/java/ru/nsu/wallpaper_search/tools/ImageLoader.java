@@ -44,4 +44,35 @@ public class ImageLoader {
 
         throw new ImageLoadException("Failed to access an image via any link");
     }
+
+    public static String loadThumnail(PicCell links) throws ImageLoadException {
+        long flag = -1;
+        String user = System.getProperty("user.name");
+        String datPath = String.format(FOLDER, user);
+
+        try {
+            if (!Files.exists(Paths.get(datPath))) {
+                Files.createDirectory(Paths.get(datPath));
+            }
+            datPath = FOLDER + PICNAME;
+        } catch (IOException e) {
+            datPath = ALTERNATEFOLDER + PICNAME;
+        }
+
+        datPath = String.format(datPath, user);
+        var link = links.getThumb();
+        try (var netStream = new URL(link).openStream()) {
+            flag = Files.copy(netStream, Paths.get(datPath), StandardCopyOption.REPLACE_EXISTING);
+        } catch (IOException e) {
+            flag = -1;
+        }
+
+        if (flag != -1) {
+            return datPath;
+        }
+
+
+        throw new ImageLoadException("Failed to access an thumbnail image");
+    }
+
 }

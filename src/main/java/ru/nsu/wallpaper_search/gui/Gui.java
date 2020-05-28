@@ -208,5 +208,4 @@ public class Gui extends JFrame {
         setButtonSize(button6, (int)(paneWidth * 0.25), (int)(paneHeight * 0.3));
         // TODO: заменить кнопки на JPanel с интерактивными картинками (отрисовка и взаимодействие) такие же как в ScrollPane
     }
-
 }

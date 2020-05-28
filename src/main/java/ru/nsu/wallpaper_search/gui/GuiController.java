@@ -1,5 +1,7 @@
 package ru.nsu.wallpaper_search.gui;
 
+import ru.nsu.wallpaper_search.tools.DataHandler;
+
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
@@ -7,13 +9,13 @@ import java.util.ArrayList;
 
 public class GuiController {
     private Gui view;
-    private Runnable searcher;
+    DataHandler searcher;
     private Runnable changeWP;
     private static final String PLACEHOLDER = "Enter your request...";
     private PicController picController;
 
     public GuiController(Runnable searcher, Runnable changeWP) {
-        this.searcher = searcher;
+        this.searcher = (DataHandler) searcher;
         this.changeWP = changeWP;
         view = new Gui();
         view.pack();
@@ -41,6 +43,7 @@ public class GuiController {
 
     private void sendRequest(ActionEvent e) {
         searcher.run();
+        drawImages(searcher.getThumbnails());
     }
 
     public String getRequest() {
