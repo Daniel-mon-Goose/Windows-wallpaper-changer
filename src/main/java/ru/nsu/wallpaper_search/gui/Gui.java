@@ -44,7 +44,7 @@ public class Gui extends JFrame {
     private static final int SPACE_SIZE = 10;
     private static final int IMAGES_IN_ROW = 5;
     private Map<BufferedImage, Coords> imageCoords = new HashMap<>();
-    private Map<BufferedImage, Coords> buttonsCoords = new HashMap<>();
+    private Map<String, Coords> buttonsCoords = new HashMap<>();
 
     public Gui() {
         add(contentPane);
@@ -137,14 +137,14 @@ public class Gui extends JFrame {
 
     public void drawPopularThemes() {
         addPopularThemes();
-        ArrayList<BufferedImage> buttons = new ArrayList<>();
+        Map<BufferedImage, String> buttons = new HashMap<>();
         try {
-            buttons.add(ImageIO.read(new File("./src/main/resources/cat.jpg")));
-            buttons.add(ImageIO.read(new File("./src/main/resources/dog.jpg")));
-            buttons.add(ImageIO.read(new File("./src/main/resources/nature.jpg")));
-            buttons.add(ImageIO.read(new File("./src/main/resources/anime.jpg")));
-            buttons.add(ImageIO.read(new File("./src/main/resources/food.jpg")));
-            buttons.add(ImageIO.read(new File("./src/main/resources/cars.jpg")));
+            buttons.put(ImageIO.read(new File("./src/main/resources/cat.jpg")), "cat");
+            buttons.put(ImageIO.read(new File("./src/main/resources/dog.jpg")), "dog");
+            buttons.put(ImageIO.read(new File("./src/main/resources/nature.jpg")), "nature");
+            buttons.put(ImageIO.read(new File("./src/main/resources/anime.jpg")), "anime");
+            buttons.put(ImageIO.read(new File("./src/main/resources/food.jpg")), "food");
+            buttons.put(ImageIO.read(new File("./src/main/resources/cars.jpg")), "cars");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -158,15 +158,17 @@ public class Gui extends JFrame {
         graphics.fillRect(0, 0, popularThemes.getWidth(), popularThemes.getHeight());
         int x = 0;
         int y = 0;
-        for (int i = 0; i < buttons.size(); i++) {
+        int i = 0;
+        for (Map.Entry<BufferedImage, String> entry : buttons.entrySet()) {
             if (i % 3 == 0 && i != 0) {
                 y += (buttonSize + space * 2);
                 x = 0;
             }
-            BufferedImage image = buttons.get(i);
+            BufferedImage image = entry.getKey();
             graphics.drawImage(image, space + x, space + y, buttonSize, buttonSize, null);
-            buttonsCoords.put(image, new Coords(space + x, space + y));
+            buttonsCoords.put(entry.getValue(), new Coords(space + x, space + y));
             x += (buttonSize + space * 2);
+            i++;
         }
         repaint();
     }
@@ -224,6 +226,10 @@ public class Gui extends JFrame {
 
     public void addSearchListener(ActionListener l) {
         searchButton.addActionListener(l);
+    }
+
+    public void addThemesListener(MouseListener l) {
+        popularThemesPane.addMouseListener(l);
     }
 
     public void createPlaceholder(String placeholder, FocusListener f) {
