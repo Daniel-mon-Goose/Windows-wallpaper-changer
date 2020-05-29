@@ -18,6 +18,7 @@ public class GuiController {
         this.searcher = (DataHandler) searcher;
         this.changeWP = changeWP;
         view = new Gui();
+        view.drawPopularThemes();
         view.pack();
         view.setVisible(true);
         view.createPlaceholder(PLACEHOLDER, new FocusListener() {
