@@ -52,7 +52,7 @@
                     <destFile>${project.basedir}/target/jacoco.exec</destFile>
                     <dataFile>${project.basedir}/target/jacoco.exec</dataFile>
                     <excludes>
-                        <exclude>**/gui/**/*.class</exclude>
+                        <exclude>**/gui/**</exclude>
                     </excludes>
                 </configuration>
                 <executions>
