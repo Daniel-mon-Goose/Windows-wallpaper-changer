@@ -9,29 +9,44 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DataHandler{
-    public DataHandler() {}
+public class DataHandler implements Runnable{
 
-    public ArrayList<BufferedImage> findPics(Integer width, Integer height, String theme) {
-        List<PicCell> links;
-        ArrayList<BufferedImage> thumbnails = new ArrayList<>();
+    Integer width = 1920;
+    Integer height = 1080;
+    String theme = "cat";
+    ArrayList<BufferedImage> thumbnails = new ArrayList<>();
+    List<PicCell> links;
+
+
+    @Override
+    public void run() {
         try {
             links = new Scraper().respondWithQuery(width.toString() + "x" + height.toString(), theme);
-            //TODO: download thumbnails
-
-            //dummy
-            for (int i = 0; i < 15; i++) {
-                thumbnails.add(ImageIO.read(new File("./src/main/resources/cat2.jpg")));
-                thumbnails.add(ImageIO.read(new File("./src/main/resources/dog2.jpg")));
+            for (var thumb : links) {
+                thumbnails.add(ImageIO.read(new File(ImageLoader.loadThumbnail(thumb))));
             }
         } catch (IOException e) {
             //ignore
         }
+    }
+
+    public void setWidth(Integer width) {
+        this.width = width;
+    }
+
+    public void setHeight(Integer height) {
+        this.height = height;
+    }
+
+    public void setTheme(String theme) {
+        this.theme = theme;
+    }
+
+    public List<BufferedImage> getThumbnails() {
         return thumbnails;
     }
+
+    public List<PicCell> getLinks() {
+        return links;
+    }
 }
-
-/*
-
-        }
-*/
