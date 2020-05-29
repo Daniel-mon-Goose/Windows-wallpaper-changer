@@ -21,8 +21,8 @@ public class DataHandler{
 
             //dummy
             for (int i = 0; i < 15; i++) {
-                thumbnails.add(ImageIO.read(new File("./src/main/resources/cat.jpg")));
-                thumbnails.add(ImageIO.read(new File("./src/main/resources/dog.jpg")));
+                thumbnails.add(ImageIO.read(new File("./src/main/resources/cat2.jpg")));
+                thumbnails.add(ImageIO.read(new File("./src/main/resources/dog2.jpg")));
             }
         } catch (IOException e) {
             //ignore

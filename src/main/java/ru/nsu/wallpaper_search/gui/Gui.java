@@ -35,7 +35,8 @@ public class Gui extends JFrame {
     private int galleryWidth;
     private int windowWidth;
     private int galleryHeight;
-    private int cellSize;
+    private int xCellSize;
+    private int yCellSize;
     private int imagesNum;
     private static final int SPACE_SIZE = 10;
     private static final int IMAGES_IN_ROW = 5;
@@ -137,11 +138,12 @@ public class Gui extends JFrame {
         galleryPane.setVisible(true);
 
         galleryWidth = windowWidth;
-        cellSize = galleryWidth / IMAGES_IN_ROW - 2 * SPACE_SIZE;
+        xCellSize = galleryWidth / IMAGES_IN_ROW - 2 * SPACE_SIZE;
+        yCellSize = xCellSize * (int)heightBox.getSelectedItem() / (int)widthBox.getSelectedItem();
         int rowNum = imagesNum / IMAGES_IN_ROW;
         if (imagesNum % IMAGES_IN_ROW != 0) rowNum++;
-        galleryHeight = (cellSize + 2 * SPACE_SIZE) * rowNum;
-        resultPaneHeight = 2 * cellSize + 4 * SPACE_SIZE;
+        galleryHeight = (yCellSize + 2 * SPACE_SIZE) * rowNum;
+        resultPaneHeight = 2 * yCellSize + 4 * SPACE_SIZE;
         resizeWindow();
     }
 
@@ -157,18 +159,18 @@ public class Gui extends JFrame {
         int y = 0;
         for (int i = 0; i < images.size(); i++) {
             if (i % IMAGES_IN_ROW == 0 && i != 0) {
-                y += (cellSize + SPACE_SIZE * 2);
+                y += (yCellSize + SPACE_SIZE * 2);
                 x = 0;
             }
             BufferedImage image = images.get(i);
-            graphics.drawImage(image, SPACE_SIZE + x, SPACE_SIZE + y, cellSize, cellSize, null);
+            graphics.drawImage(image, SPACE_SIZE + x, SPACE_SIZE + y, xCellSize, yCellSize, null);
             imageCoords.put(image, new Coords(SPACE_SIZE + x, SPACE_SIZE + y));
-            x += (cellSize + SPACE_SIZE * 2);
+            x += (xCellSize + SPACE_SIZE * 2);
         }
         repaint();
     }
 
-    public void addSearshListener(ActionListener l) {
+    public void addSearchListener(ActionListener l) {
         searchButton.addActionListener(l);
     }
 
@@ -187,8 +189,8 @@ public class Gui extends JFrame {
         for(Map.Entry<BufferedImage, Coords> entry : imageCoords.entrySet()) {
             x = entry.getValue().getX();
             y = entry.getValue().getY();
-            if (x <= coords.getX() && coords.getX() <= x + cellSize &&
-                    y <= coords.getY() && coords.getY() <= y + cellSize) {
+            if (x <= coords.getX() && coords.getX() <= x + xCellSize &&
+                    y <= coords.getY() && coords.getY() <= y + xCellSize) {
                 return entry.getKey();
             }
         }

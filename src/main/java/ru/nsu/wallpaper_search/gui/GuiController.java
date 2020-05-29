@@ -36,7 +36,7 @@ public class GuiController {
             }
         });
 
-        view.addSearshListener(this::sendRequest);
+        view.addSearchListener(this::sendRequest);
     }
 
     private void sendRequest(ActionEvent e) {
@@ -46,6 +46,7 @@ public class GuiController {
     public String getRequest() {
         return view.getText(view.getQueryField());
     }
+
     public int getWidth() {
         return view.getWidth();
     }
