@@ -34,7 +34,7 @@ public class DataHandlerTest{
             e.printStackTrace();
         }
         handler.run();
-        Assert.assertNull(handler.getLinks());
+        Assert.assertTrue(handler.getLinks().isEmpty());
     }
 
 }
