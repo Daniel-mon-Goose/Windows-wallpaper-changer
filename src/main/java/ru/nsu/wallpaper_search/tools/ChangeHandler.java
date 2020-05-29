@@ -16,7 +16,7 @@ public class ChangeHandler implements Runnable{
             String path = ImageLoader.load(cell);
             Changer.changeDesktopImage(path);
         } catch (ImageLoadException | FileSystemException e) {
-            e.printStackTrace();
+            //ignore
         }
     }
 
