@@ -27,18 +27,14 @@ public class ImageLoader {
         String datPath =  String.format(FOLDER, rootFolder, USER);
         if (mode) {
             try {
-                if (!Files.exists(Paths.get(datPath))) {
-                    Files.createDirectory(Paths.get(datPath));
-                }
+                if (!Files.exists(Paths.get(datPath))) { Files.createDirectory(Paths.get(datPath)); }
                 datPath = FOLDER + PICNAME;
             } catch (IOException e) {
                 datPath = ALTERNATEFOLDER + PICNAME;
             }
         } else {
             try {
-                if (!Files.exists(Paths.get(datPath))) {
-                    Files.createDirectory(Paths.get(datPath));
-                }
+                if (!Files.exists(Paths.get(datPath))) { Files.createDirectory(Paths.get(datPath)); }
                 datPath = FOLDER + THUMBNAME;
             } catch (IOException e) {
                 datPath = ALTERNATEFOLDER + THUMBNAME;
@@ -58,9 +54,7 @@ public class ImageLoader {
                 flag = Files.copy(netStream, Paths.get(datPath), StandardCopyOption.REPLACE_EXISTING);
             } catch (IOException e) { flag = -1; }
 
-            if (flag != -1) {
-                return datPath;
-            }
+            if (flag != -1) { return datPath; }
         }
 
         throw new ImageLoadException("Failed to access an image via any link");
@@ -75,13 +69,9 @@ public class ImageLoader {
         var link = links.getThumb();
         try (var netStream = new URL(link).openStream()) {
             flag = Files.copy(netStream, Paths.get(datPath), StandardCopyOption.REPLACE_EXISTING);
-        } catch (IOException e) {
-            flag = -1;
-        }
+        } catch (IOException e) { flag = -1; }
 
-        if (flag != -1) {
-            return datPath;
-        }
+        if (flag != -1) { return datPath; }
 
         throw new ImageLoadException("Failed to access an thumbnail image");
     }
