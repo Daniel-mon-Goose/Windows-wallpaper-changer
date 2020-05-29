@@ -2,7 +2,6 @@ package ru.nsu.wallpaper_search;
 
 import org.junit.Assert;
 import org.junit.Test;
-import ru.nsu.wallpaper_search.changer.Changer;
 import ru.nsu.wallpaper_search.exceptions.ImageLoadException;
 import ru.nsu.wallpaper_search.tools.ImageLoader;
 import ru.nsu.wallpaper_search.tools.PicCell;

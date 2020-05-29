@@ -8,7 +8,7 @@ stages:
 variables:
   MAVEN_CLI_OPTS: "--batch-mode"
   MAVEN_OPTS: "-Dmaven.repo.local=.m2/repository"
-  SONAR_TOKEN: fb911861a0ff4db3bc1b0eaf1a079d2104dae04c
+  SONAR_TOKEN: c6c2198239b3732ba6d0a77f9ac36bbb3b873c92
   SONAR_HOST_URL: http://84.237.50.237:9000
   GIT_DEPTH: 0
   
@@ -30,7 +30,7 @@ test:
 sonareqube-check:
   stage: jacoco_check
   script:
-    - mvn sonar:sonar -Dsonar.projectKey=ru.nsu.wallpaper_search:wallpaper_search -Dsonar.host.url=$SONAR_HOST_URL -Dsonar.login=$SONAR_TOKEN -Dsonar.core.codeCoveragePlugin=jacoco -Dsonar.jacoco.reportPath=/target/jacoco.exec -Dsonar.dynamicAnalysis=reuseReports -Dsonar.surefire.reportsPath=/target/test-reports
+    - mvn sonar:sonar -Dsonar.projectKey=PADS_WC -Dsonar.host.url=$SONAR_HOST_URL -Dsonar.login=$SONAR_TOKEN -Dsonar.core.codeCoveragePlugin=jacoco -Dsonar.jacoco.reportPath=/target/jacoco.exec -Dsonar.dynamicAnalysis=reuseReports -Dsonar.surefire.reportsPath=/target/test-reports
   allow_failure: true
   only:
     - master

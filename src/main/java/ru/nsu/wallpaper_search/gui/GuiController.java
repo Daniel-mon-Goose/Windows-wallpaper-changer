@@ -46,7 +46,7 @@ public class GuiController {
         searcher.setHeight(getHeight());
         searcher.setTheme(getRequest());
         searcher.run();
-        drawImages(searcher.getThumbnails());
+        drawImages((ArrayList<BufferedImage>) searcher.getThumbnails());
     }
 
     public String getRequest() {
@@ -77,7 +77,6 @@ public class GuiController {
                 BufferedImage img = view.getImage(new Coords(e.getX(), e.getY()));
 
                 if (img != null) {
-                    //TODO: определить, какая именно картинка по счету нажата
                     int picNumber = searcher.getThumbnails().indexOf(img);
                     view.setEnabled(false);
                     picController = new PicController(img, searcher.getLinks().get(picNumber), changeWP, () -> view.setEnabled(true));
