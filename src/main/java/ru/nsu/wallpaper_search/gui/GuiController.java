@@ -108,7 +108,11 @@ public class GuiController {
                 String label = view.getImageLabel(new Coords(e.getX(), e.getY()));
                 if (label != null) {
                     view.setQueryField(label);
+                    searcher.setWidth(getWidth());
+                    searcher.setHeight(getHeight());
+                    searcher.setTheme(label);
                     searcher.run();
+                    drawImages((ArrayList<BufferedImage>) searcher.getThumbnails());
                 }
             }
         }

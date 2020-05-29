@@ -20,6 +20,7 @@ public class DataHandler implements Runnable{
 
     @Override
     public void run() {
+
         try {
             links = new Scraper().respondWithQuery(width.toString() + "x" + height.toString(), theme);
             for (var thumb : links) {
