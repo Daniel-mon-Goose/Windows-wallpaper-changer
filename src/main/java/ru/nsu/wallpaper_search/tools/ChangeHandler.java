@@ -11,7 +11,6 @@ public class ChangeHandler implements Runnable{
 
     @Override
     public void run() {
-        System.out.println("changer run");
         try {
             String path = ImageLoader.load(cell);
             Changer.changeDesktopImage(path);
@@ -23,4 +22,6 @@ public class ChangeHandler implements Runnable{
     public void setCell(PicCell cell) {
         this.cell = cell;
     }
+
+    public PicCell getCell() { return cell; }
 }

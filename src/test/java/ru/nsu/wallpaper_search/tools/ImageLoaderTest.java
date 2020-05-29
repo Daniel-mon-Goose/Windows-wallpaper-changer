@@ -1,10 +1,8 @@
-package ru.nsu.wallpaper_search;
+package ru.nsu.wallpaper_search.tools;
 
 import org.junit.Assert;
 import org.junit.Test;
 import ru.nsu.wallpaper_search.exceptions.ImageLoadException;
-import ru.nsu.wallpaper_search.tools.ImageLoader;
-import ru.nsu.wallpaper_search.tools.PicCell;
 
 import java.io.IOException;
 
@@ -36,7 +34,25 @@ public class ImageLoaderTest {
         Assert.assertTrue(String.format(path, user).equals(path)
                 || String.format(alternatePath, user).equals(path));
 
-        //Changer.changeDesktopImage(path);
+    }
+
+    @Test
+    public void loadThumbnailTest() throws IOException {
+        if (!System.getProperty("os.name").toLowerCase().contains("win")) {
+            System.out.println("Currently windows supported only");
+            return;
+        }
+
+        var workingCell = new PicCell("https://im0-tub-ru.yandex.net/i?id=81ef90734d287839980ce545c9dc3696&n=13");
+        workingCell.addOriginal(blockedLink);
+        workingCell.addOriginal(workingLink);
+        workingCell.addOriginal(blockedLink);
+
+        var path = ImageLoader.loadThumbnail(workingCell);
+        var user = System.getProperty("user.name");
+        Assert.assertTrue(String.format(path, user).equals(path)
+                || String.format(alternatePath, user).equals(path));
+
     }
 
     @Test
@@ -45,5 +61,13 @@ public class ImageLoaderTest {
         blockedCell.addOriginal(blockedLink);
 
         Assert.assertThrows(error, () -> ImageLoader.load(blockedCell));
+    }
+
+    @Test
+    public void failureThumbTest() {
+        var blockedCell = new PicCell("https://im0-tub-ru.yandex.net/i?id=b92098ac236759f72aa489975efb76c8&n=13");
+        blockedCell.addOriginal(blockedLink);
+
+        Assert.assertThrows(error, () -> ImageLoader.loadThumbnail(blockedCell));
     }
 }

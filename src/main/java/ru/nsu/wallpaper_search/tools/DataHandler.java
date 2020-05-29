@@ -14,13 +14,14 @@ public class DataHandler implements Runnable{
     Integer width = 1920;
     Integer height = 1080;
     String theme = "cat";
-    ArrayList<BufferedImage> thumbnails = new ArrayList<>();
+    ArrayList<BufferedImage> thumbnails;
     List<PicCell> links;
 
 
     @Override
     public void run() {
         try {
+            thumbnails = new ArrayList<>();
             links = new Scraper().respondWithQuery(width.toString() + "x" + height.toString(), theme);
             for (var thumb : links) {
                 thumbnails.add(ImageIO.read(new File(ImageLoader.loadThumbnail(thumb))));
@@ -49,4 +50,17 @@ public class DataHandler implements Runnable{
     public List<PicCell> getLinks() {
         return links;
     }
+
+    public Integer getWidth() {
+        return width;
+    }
+
+    public Integer getHeight() {
+        return height;
+    }
+
+    public String getTheme() {
+        return theme;
+    }
+
 }
