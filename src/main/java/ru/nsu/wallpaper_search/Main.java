@@ -8,6 +8,6 @@ public class Main {
     public static void main(String[] args) {
         var dh = new DataHandler();
         var ch = new ChangeHandler();
-        GuiController g = new GuiController(dh, ch);
+        new GuiController(dh, ch);
     }
 }

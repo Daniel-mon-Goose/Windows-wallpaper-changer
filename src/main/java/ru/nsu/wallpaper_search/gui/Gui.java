@@ -56,7 +56,7 @@ public class Gui extends JFrame {
         prefPane.setPreferredSize(new Dimension(paneWidth, (int)(paneHeight * 0.2)));
         buttonPane.setPreferredSize(new Dimension(paneWidth, (int)(paneHeight * 0.6)));
         queryPane.setPreferredSize(new Dimension(paneWidth, (int)(paneHeight * 0.2)));
-        //setResizable(false);
+        setResizable(false);
 
         setButtonsDesign();
 
