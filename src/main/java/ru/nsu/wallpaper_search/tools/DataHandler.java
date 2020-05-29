@@ -11,15 +11,16 @@ import java.util.List;
 
 public class DataHandler implements Runnable{
 
-    Integer width = 1920;
-    Integer height = 1080;
-    String theme = "cat";
-    ArrayList<BufferedImage> thumbnails;
-    List<PicCell> links;
+    private Integer width = 1920;
+    private Integer height = 1080;
+    private String theme = "cat";
+    private ArrayList<BufferedImage> thumbnails;
+    private List<PicCell> links;
+    private boolean error = false;
 
 
     @Override
-    public void run() {
+    public void run()  {
 
         try {
             thumbnails = new ArrayList<>();
@@ -29,7 +30,7 @@ public class DataHandler implements Runnable{
                 thumbnails.add(ImageIO.read(new File(ImageLoader.loadThumbnail(thumb))));
             }
         } catch (IOException e) {
-            //ignore
+            error = true;
         }
     }
 
@@ -51,5 +52,9 @@ public class DataHandler implements Runnable{
 
     public List<PicCell> getLinks() {
         return links;
+    }
+
+    public boolean isError() {
+        return error;
     }
 }

@@ -16,6 +16,7 @@ public class ChangeHandlerTest {
         handler.setCell(cell);
         handler.run();
         Assert.assertSame(cell, handler.getCell());
+        Assert.assertFalse(handler.isError());
     }
 
 }

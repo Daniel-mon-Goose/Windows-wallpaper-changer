@@ -6,8 +6,6 @@ import ru.nsu.wallpaper_search.tools.DataHandler;
 
 public class Main {
     public static void main(String[] args) {
-        var dh = new DataHandler();
-        var ch = new ChangeHandler();
-        new GuiController(dh, ch);
+        new GuiController(new DataHandler(), new ChangeHandler());
     }
 }

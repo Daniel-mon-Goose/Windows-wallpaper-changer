@@ -8,6 +8,7 @@ import java.nio.file.FileSystemException;
 public class ChangeHandler implements Runnable{
 
     private PicCell cell;
+    private boolean error = false;
 
     @Override
     public void run() {
@@ -15,7 +16,7 @@ public class ChangeHandler implements Runnable{
             String path = ImageLoader.load(cell);
             Changer.changeDesktopImage(path);
         } catch (ImageLoadException | FileSystemException e) {
-            //ignore
+            error = true;
         }
     }
 
@@ -24,4 +25,8 @@ public class ChangeHandler implements Runnable{
     }
 
     public PicCell getCell() { return cell; }
+
+    public boolean isError() {
+        return error;
+    }
 }
