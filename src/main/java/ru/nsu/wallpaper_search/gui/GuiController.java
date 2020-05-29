@@ -75,9 +75,12 @@ public class GuiController {
         public void mouseClicked(MouseEvent e) {
             if (e.getClickCount() == 2) {
                 BufferedImage img = view.getImage(new Coords(e.getX(), e.getY()));
+
                 if (img != null) {
+                    //TODO: определить, какая именно картинка по счету нажата
+                    int picNumber = searcher.getThumbnails().indexOf(img);
                     view.setEnabled(false);
-                    picController = new PicController(img, changeWP, () -> view.setEnabled(true));
+                    picController = new PicController(img, searcher.getLinks().get(picNumber), changeWP, () -> view.setEnabled(true));
                 }
             }
         }

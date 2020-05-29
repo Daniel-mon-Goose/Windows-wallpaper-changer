@@ -12,6 +12,7 @@ public class ImageLoader {
     private static final String FOLDER = "C:/Users/%s/WallpaperSearcher";
     private static final String ALTERNATEFOLDER = "C:/Users/%s/";
     private static final String PICNAME = "/found.jpg";
+    private static final String THUMBNAME = "/thumb.jpg";
 
     private ImageLoader() {
         throw new IllegalStateException("Utility class");
@@ -54,9 +55,9 @@ public class ImageLoader {
             if (!Files.exists(Paths.get(datPath))) {
                 Files.createDirectory(Paths.get(datPath));
             }
-            datPath = FOLDER + PICNAME;
+            datPath = FOLDER + THUMBNAME;
         } catch (IOException e) {
-            datPath = ALTERNATEFOLDER + PICNAME;
+            datPath = ALTERNATEFOLDER + THUMBNAME;
         }
 
         datPath = String.format(datPath, user);
@@ -70,7 +71,6 @@ public class ImageLoader {
         if (flag != -1) {
             return datPath;
         }
-
 
         throw new ImageLoadException("Failed to access an thumbnail image");
     }

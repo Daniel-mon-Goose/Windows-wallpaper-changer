@@ -1,5 +1,8 @@
 package ru.nsu.wallpaper_search.gui;
 
+import ru.nsu.wallpaper_search.tools.ImageLoader;
+import ru.nsu.wallpaper_search.tools.PicCell;
+
 import java.awt.event.ActionEvent;
 import java.awt.image.BufferedImage;
 
@@ -9,7 +12,7 @@ public class PicController {
     Runnable notifyOnClose;
     private BufferedImage pickedImage;
 
-    public PicController(BufferedImage pic, Runnable changeWP, Runnable notifyOnClose) {
+    public PicController(BufferedImage pic, PicCell cell, Runnable changeWP, Runnable notifyOnClose) {
         pickedImage = pic;
         this.changeWP = changeWP;
         this.notifyOnClose = notifyOnClose;
@@ -19,6 +22,10 @@ public class PicController {
 
         view.addOkButtonActionListener(this::ok);
         view.addCancelButtonActionListener(this::cancel);
+        try {ImageLoader.load(cell); }
+        catch (Exception e) {
+            ///ignore
+        }
     }
 
     public BufferedImage getPickedImage() {
