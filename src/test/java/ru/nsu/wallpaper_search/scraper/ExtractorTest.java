@@ -1,8 +1,7 @@
-package ru.nsu.wallpaper_search;
+package ru.nsu.wallpaper_search.scraper;
 
 import org.junit.Assert;
 import org.junit.Test;
-import ru.nsu.wallpaper_search.scraper.Extractor;
 
 public class ExtractorTest {
     private static final Class<IllegalStateException> error = IllegalStateException.class;

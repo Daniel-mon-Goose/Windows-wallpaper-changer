@@ -30,7 +30,7 @@ public class Extractor {
 
     private static final Map<String, String> cookies = new HashMap<>();
 
-    public Extractor() {
+    Extractor() {
         throw new IllegalStateException("Utility class");
     }
 
