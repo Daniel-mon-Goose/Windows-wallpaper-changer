@@ -217,6 +217,7 @@ public class Gui extends JFrame {
 
         if (imagesNum == 0) {
             JOptionPane.showMessageDialog(this, "No results.");
+            return;
         }
 
         addResultsPane();

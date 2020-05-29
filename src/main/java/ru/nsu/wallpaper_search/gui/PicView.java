@@ -13,8 +13,8 @@ public class PicView extends JFrame {
     private JButton cancelButton;
     private int picWidth;
     private int picHeight;
-    private final int BUTTON_WIDTH = 200;
-    private final int BUTTON_HEIGHT = 30;
+    private int BUTTON_WIDTH = 200;
+    private int BUTTON_HEIGHT = 30;
 
     public PicView(BufferedImage pic, Runnable notifyOnClose) {
         contentPane = new JPanel();
