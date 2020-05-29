@@ -214,6 +214,11 @@ public class Gui extends JFrame {
 
     public void drawImages(ArrayList<BufferedImage> images) {
         imagesNum = images.size();
+
+        if (imagesNum == 0) {
+            JOptionPane.showMessageDialog(this, "No results.");
+        }
+
         addResultsPane();
         gallery = new BufferedImage(galleryWidth, galleryHeight, BufferedImage.TYPE_INT_RGB);
 
