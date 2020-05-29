@@ -1,11 +1,14 @@
 package ru.nsu.wallpaper_search.gui;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusListener;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -41,6 +44,7 @@ public class Gui extends JFrame {
     private static final int SPACE_SIZE = 10;
     private static final int IMAGES_IN_ROW = 5;
     private Map<BufferedImage, Coords> imageCoords = new HashMap<>();
+    private Map<BufferedImage, Coords> buttonsCoords = new HashMap<>();
 
     public Gui() {
         add(contentPane);
@@ -103,6 +107,7 @@ public class Gui extends JFrame {
 
     public void resizeWindow() {
         setResizable(true);
+
         resize(new Dimension(windowWidth + 100, paneHeight + resultPaneHeight + 30));
         resultsPane.setPreferredSize(new Dimension(windowWidth, resultPaneHeight));
         galleryPane.setPreferredSize(new Dimension(galleryWidth, galleryHeight));
@@ -110,28 +115,60 @@ public class Gui extends JFrame {
     }
 
     private void addPopularThemes() {
-    popularThemesPane = new JPanel() {
-        @Override
-        public void paintComponent(Graphics g) {
-            super.paintComponent(g);
-            g.drawImage(popularThemes, 0, 0, this);
-        }
-    };
-    setLayout(layout);
-    layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, prefPane, 0, SpringLayout.HORIZONTAL_CENTER, contentPane);
-    layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, popularThemesPane, 0, SpringLayout.HORIZONTAL_CENTER, prefPane);
-    layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, queryPane, 0, SpringLayout.HORIZONTAL_CENTER, popularThemesPane);
-    layout.putConstraint(SpringLayout.NORTH, prefPane, 0, SpringLayout.NORTH, contentPane);
-    layout.putConstraint(SpringLayout.NORTH, popularThemesPane, 0, SpringLayout.SOUTH, prefPane);
-    layout.putConstraint(SpringLayout.NORTH, queryPane, 0, SpringLayout.SOUTH, popularThemesPane);
-    contentPane.add(popularThemesPane, layout);
+        popularThemesPane = new JPanel() {
+            @Override
+            public void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                g.drawImage(popularThemes, 0, 0, this);
+            }
+        };
+        setLayout(layout);
+        layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, prefPane, 0, SpringLayout.HORIZONTAL_CENTER, contentPane);
+        layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, popularThemesPane, 0, SpringLayout.HORIZONTAL_CENTER, prefPane);
+        layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, queryPane, 0, SpringLayout.HORIZONTAL_CENTER, popularThemesPane);
+        layout.putConstraint(SpringLayout.NORTH, prefPane, 0, SpringLayout.NORTH, contentPane);
+        layout.putConstraint(SpringLayout.NORTH, popularThemesPane, 0, SpringLayout.SOUTH, prefPane);
+        layout.putConstraint(SpringLayout.NORTH, queryPane, 0, SpringLayout.SOUTH, popularThemesPane);
+        contentPane.add(popularThemesPane, layout);
 
-    popularThemesPane.setVisible(true);
-    popularThemesPane.setPreferredSize(new Dimension(popularThemesWidth, popularThemesHeight));
+        popularThemesPane.setVisible(true);
+        popularThemesPane.setPreferredSize(new Dimension(popularThemesWidth, popularThemesHeight));
     }
 
     public void drawPopularThemes() {
         addPopularThemes();
+        ArrayList<BufferedImage> buttons = new ArrayList<>();
+        try {
+            buttons.add(ImageIO.read(new File("./src/main/resources/cat.jpg")));
+            buttons.add(ImageIO.read(new File("./src/main/resources/dog.jpg")));
+            buttons.add(ImageIO.read(new File("./src/main/resources/nature.jpg")));
+            buttons.add(ImageIO.read(new File("./src/main/resources/anime.jpg")));
+            buttons.add(ImageIO.read(new File("./src/main/resources/food.jpg")));
+            buttons.add(ImageIO.read(new File("./src/main/resources/cars.jpg")));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        popularThemes = new BufferedImage(popularThemesWidth, popularThemesHeight, BufferedImage.TYPE_INT_RGB);
+
+        int buttonSize = (popularThemesWidth * 10 / 36);
+        int space = (buttonSize / 10);
+
+        Graphics2D graphics = popularThemes.createGraphics();
+        graphics.setPaint(Color.WHITE);
+        graphics.fillRect(0, 0, popularThemes.getWidth(), popularThemes.getHeight());
+        int x = 0;
+        int y = 0;
+        for (int i = 0; i < buttons.size(); i++) {
+            if (i % 3 == 0 && i != 0) {
+                y += (buttonSize + space * 2);
+                x = 0;
+            }
+            BufferedImage image = buttons.get(i);
+            graphics.drawImage(image, space + x, space + y, buttonSize, buttonSize, null);
+            buttonsCoords.put(image, new Coords(space + x, space + y));
+            x += (buttonSize + space * 2);
+        }
+        repaint();
     }
 
     private void addResultsPane() {
