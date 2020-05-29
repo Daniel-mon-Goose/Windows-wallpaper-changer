@@ -49,7 +49,7 @@ public class PicView extends JFrame {
         setTitle("Wallpaper search");
 
         this.setPreferredSize(new Dimension(picWidth + 10, picHeight + 50));
-        this.setResizable(false);
+        //this.setResizable(false);
         this.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
                 notifyOnClose.run();

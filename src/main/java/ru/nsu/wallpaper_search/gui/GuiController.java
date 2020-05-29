@@ -1,5 +1,7 @@
 package ru.nsu.wallpaper_search.gui;
 
+import ru.nsu.wallpaper_search.tools.DataHandler;
+
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
@@ -7,13 +9,13 @@ import java.util.ArrayList;
 
 public class GuiController {
     private Gui view;
-    private Runnable searcher;
+    private DataHandler searcher;
     private Runnable changeWP;
     private static final String PLACEHOLDER = "Enter your request...";
     private PicController picController;
 
     public GuiController(Runnable searcher, Runnable changeWP) {
-        this.searcher = searcher;
+        this.searcher = (DataHandler) searcher;
         this.changeWP = changeWP;
         view = new Gui();
         view.pack();
@@ -40,7 +42,11 @@ public class GuiController {
     }
 
     private void sendRequest(ActionEvent e) {
+        searcher.setWidth(getWidth());
+        searcher.setHeight(getHeight());
+        searcher.setTheme(getRequest());
         searcher.run();
+        drawImages(searcher.getThumbnails());
     }
 
     public String getRequest() {
@@ -69,9 +75,12 @@ public class GuiController {
         public void mouseClicked(MouseEvent e) {
             if (e.getClickCount() == 2) {
                 BufferedImage img = view.getImage(new Coords(e.getX(), e.getY()));
+
                 if (img != null) {
+                    //TODO: определить, какая именно картинка по счету нажата
+                    int picNumber = searcher.getThumbnails().indexOf(img);
                     view.setEnabled(false);
-                    picController = new PicController(img, changeWP, () -> view.setEnabled(true));
+                    picController = new PicController(img, searcher.getLinks().get(picNumber), changeWP, () -> view.setEnabled(true));
                 }
             }
         }
