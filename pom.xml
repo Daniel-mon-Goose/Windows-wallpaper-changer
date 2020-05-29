@@ -24,7 +24,7 @@
         <sonar.coverage.exclusions>
             **/gui/**/*
             **/Main.java
-            **/Changer/*
+            **/changer/*
         </sonar.coverage.exclusions>
     </properties>
 
