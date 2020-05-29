@@ -23,6 +23,8 @@
         <sonar.language>java</sonar.language>
         <sonar.coverage.exclusions>
             **/gui/**/*
+            **/Main.java
+            **/Changer/*
         </sonar.coverage.exclusions>
     </properties>
 
