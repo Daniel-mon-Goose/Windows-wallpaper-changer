@@ -18,6 +18,7 @@ public class GuiController {
         this.searcher = (DataHandler) searcher;
         this.changeWP = changeWP;
         view = new Gui();
+        view.drawPopularThemes();
         view.pack();
         view.setVisible(true);
         view.createPlaceholder(PLACEHOLDER, new FocusListener() {
@@ -38,7 +39,8 @@ public class GuiController {
             }
         });
 
-        view.addSearshListener(this::sendRequest);
+        view.addSearchListener(this::sendRequest);
+        view.addThemesListener(new ThemesListener());
     }
 
     private void sendRequest(ActionEvent e) {
@@ -52,6 +54,7 @@ public class GuiController {
     public String getRequest() {
         return view.getText(view.getQueryField());
     }
+
     public int getWidth() {
         return view.getWidth();
     }
@@ -80,6 +83,32 @@ public class GuiController {
                     int picNumber = searcher.getThumbnails().indexOf(img);
                     view.setEnabled(false);
                     picController = new PicController(img, searcher.getLinks().get(picNumber), changeWP, () -> view.setEnabled(true));
+                }
+            }
+        }
+
+        @Override
+        public void mousePressed(MouseEvent e) {}
+
+        @Override
+        public void mouseReleased(MouseEvent e) {}
+
+        @Override
+        public void mouseEntered(MouseEvent e) {}
+
+        @Override
+        public void mouseExited(MouseEvent e) {}
+    }
+
+    class ThemesListener implements MouseListener {
+
+        @Override
+        public void mouseClicked(MouseEvent e) {
+            if (e.getClickCount() == 2) {
+                String label = view.getImageLabel(new Coords(e.getX(), e.getY()));
+                if (label != null) {
+                    view.setQueryField(label);
+                    searcher.run();
                 }
             }
         }
