@@ -13,6 +13,8 @@ public class PicView extends JFrame {
     private JButton cancelButton;
     private int picWidth;
     private int picHeight;
+    private final int BUTTON_WIDTH = 200;
+    private final int BUTTON_HEIGHT = 30;
 
     public PicView(BufferedImage pic, Runnable notifyOnClose) {
         contentPane = new JPanel();
@@ -36,8 +38,8 @@ public class PicView extends JFrame {
 
         setButton = new JButton();
         cancelButton = new JButton();
-        setButtonDesign(setButton, 200, 30, "Set as wallpaper");
-        setButtonDesign(cancelButton, 100, 30, "Cancel");
+        setButtonDesign(setButton, BUTTON_WIDTH, BUTTON_HEIGHT, "Set as wallpaper");
+        setButtonDesign(cancelButton, BUTTON_WIDTH, BUTTON_HEIGHT, "Cancel");
 
         contentPane.add(picPane);
         contentPane.add(setButton);
@@ -48,7 +50,7 @@ public class PicView extends JFrame {
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setTitle("Wallpaper search");
 
-        this.setPreferredSize(new Dimension(picWidth + 10, picHeight + 50));
+        this.setPreferredSize(new Dimension(picWidth + 10, picHeight + BUTTON_HEIGHT + 15));
         this.setResizable(false);
         this.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
