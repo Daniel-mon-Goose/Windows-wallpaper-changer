@@ -20,14 +20,14 @@ public class Gui extends JFrame {
     private JComboBox<Integer> heightBox;
     private JTextField queryField;
     private JButton searchButton;
-    private JButton button1;
-    private JButton button2;
-    private JButton button3;
-    private JButton button4;
-    private JButton button5;
-    private JButton button6;
-    private JPanel buttonPane;
+    private JPanel popularThemesPane;
+    private BufferedImage popularThemes;
     private JScrollPane resultsPane;
+    private BufferedImage gallery;
+    private SpringLayout layout = new SpringLayout();
+
+    private int popularThemesWidth;
+    private int popularThemesHeight;
 
     private int paneWidth;
     private int paneHeight;
@@ -40,7 +40,6 @@ public class Gui extends JFrame {
     private int imagesNum;
     private static final int SPACE_SIZE = 10;
     private static final int IMAGES_IN_ROW = 5;
-    private BufferedImage gallery;
     private Map<BufferedImage, Coords> imageCoords = new HashMap<>();
 
     public Gui() {
@@ -52,14 +51,15 @@ public class Gui extends JFrame {
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         windowWidth = (int) (screenSize.getWidth() * 0.5);
         paneWidth = (int) (screenSize.getWidth() * 0.3);
-        paneHeight = (int) (screenSize.getHeight() * 0.4);
-        setPreferredSize(new Dimension(windowWidth + 100, paneHeight));
-        prefPane.setPreferredSize(new Dimension(paneWidth, (int)(paneHeight * 0.2)));
-        buttonPane.setPreferredSize(new Dimension(paneWidth, (int)(paneHeight * 0.6)));
-        queryPane.setPreferredSize(new Dimension(paneWidth, (int)(paneHeight * 0.2)));
-        setResizable(false);
 
-        setButtonsDesign();
+        popularThemesWidth = (int )(paneWidth / 1.5);
+        popularThemesHeight = (int)(popularThemesWidth / 1.5);
+        paneHeight = (int) (screenSize.getHeight() * 0.1) + popularThemesHeight;
+
+        setPreferredSize(new Dimension(windowWidth + 100, paneHeight));
+        prefPane.setPreferredSize(new Dimension(paneWidth, (int)((paneHeight - popularThemesHeight) * 0.5)));
+        queryPane.setPreferredSize(new Dimension(paneWidth, (int)((paneHeight - popularThemesHeight) * 0.5)));
+        setResizable(false);
 
         widthBox.addItem((int) screenSize.getWidth());
         heightBox.addItem((int) screenSize.getHeight());
@@ -105,39 +105,35 @@ public class Gui extends JFrame {
         setResizable(true);
         resize(new Dimension(windowWidth + 100, paneHeight + resultPaneHeight + 30));
         resultsPane.setPreferredSize(new Dimension(windowWidth, resultPaneHeight));
-        galleryPane.setPreferredSize(new Dimension(windowWidth, galleryHeight));
+        galleryPane.setPreferredSize(new Dimension(galleryWidth, galleryHeight));
         setResizable(false);
     }
 
+    private void addPopularThemes() {}
 
-    public void addResultsPane() {
+    public void drawPopularThemes() {
+        addPopularThemes();
+    }
+
+    private void addResultsPane() {
         galleryPane = new JPanel() {
             @Override
             public void paintComponent(Graphics g) {
                 super.paintComponent(g);
                 g.drawImage(gallery, 0, 0, this);
             }
-
         };
 
         resultsPane = new JScrollPane(galleryPane);
-        SpringLayout layout = new SpringLayout();
-
         setLayout(layout);
-        layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, prefPane, 0, SpringLayout.HORIZONTAL_CENTER, contentPane);
-        layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, buttonPane, 0, SpringLayout.HORIZONTAL_CENTER, prefPane);
-        layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, queryPane, 0, SpringLayout.HORIZONTAL_CENTER, buttonPane);
         layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, resultsPane, 0, SpringLayout.HORIZONTAL_CENTER, queryPane);
-        layout.putConstraint(SpringLayout.NORTH, prefPane, 0, SpringLayout.NORTH, contentPane);
-        layout.putConstraint(SpringLayout.NORTH, buttonPane, 0, SpringLayout.SOUTH, prefPane);
-        layout.putConstraint(SpringLayout.NORTH, queryPane, 0, SpringLayout.SOUTH, buttonPane);
         layout.putConstraint(SpringLayout.NORTH, resultsPane, 0, SpringLayout.SOUTH, queryPane);
         contentPane.add(resultsPane, layout);
 
         resultsPane.setVisible(true);
         galleryPane.setVisible(true);
 
-        galleryWidth = windowWidth;
+        galleryWidth = windowWidth - 20;
         xCellSize = galleryWidth / IMAGES_IN_ROW - 2 * SPACE_SIZE;
         yCellSize = xCellSize * (int)heightBox.getSelectedItem() / (int)widthBox.getSelectedItem();
         int rowNum = imagesNum / IMAGES_IN_ROW;
@@ -195,20 +191,6 @@ public class Gui extends JFrame {
             }
         }
         return null;
-    }
-
-    private void setButtonSize(JButton button, int width, int height) {
-        button.setPreferredSize(new Dimension(width, height));
-    }
-
-    private void setButtonsDesign() {
-        setButtonSize(button1, (int)(paneWidth * 0.25), (int)(paneHeight * 0.3));
-        setButtonSize(button2, (int)(paneWidth * 0.25), (int)(paneHeight * 0.3));
-        setButtonSize(button3, (int)(paneWidth * 0.25), (int)(paneHeight * 0.3));
-        setButtonSize(button4, (int)(paneWidth * 0.25), (int)(paneHeight * 0.3));
-        setButtonSize(button5, (int)(paneWidth * 0.25), (int)(paneHeight * 0.3));
-        setButtonSize(button6, (int)(paneWidth * 0.25), (int)(paneHeight * 0.3));
-        // TODO: заменить кнопки на JPanel с интерактивными картинками (отрисовка и взаимодействие) такие же как в ScrollPane
     }
 
 }
