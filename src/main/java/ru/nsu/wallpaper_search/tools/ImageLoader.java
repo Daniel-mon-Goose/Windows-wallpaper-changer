@@ -13,26 +13,44 @@ public class ImageLoader {
     private static final String ALTERNATEFOLDER = "/%s/%s/";
     private static final String PICNAME = "/found.jpg";
     private static final String THUMBNAME = "/thumb.jpg";
+    private static final String user = System.getProperty("user.name");
+
+    private static String rootFolder = "C:/Users";
+
 
     private ImageLoader() {
         throw new IllegalStateException("Utility class");
     }
 
+    private static String makePath(boolean mode) {
+        if (System.getProperty("os.name").equals("Linux")) rootFolder = "/home";
+        String datPath =  String.format(FOLDER, rootFolder, user);
+        if (mode) {
+            try {
+                if (!Files.exists(Paths.get(datPath))) {
+                    Files.createDirectory(Paths.get(datPath));
+                }
+                datPath = FOLDER + PICNAME;
+            } catch (IOException e) {
+                datPath = ALTERNATEFOLDER + PICNAME;
+            }
+        } else {
+            try {
+                if (!Files.exists(Paths.get(datPath))) {
+                    Files.createDirectory(Paths.get(datPath));
+                }
+                datPath = FOLDER + THUMBNAME;
+            } catch (IOException e) {
+                datPath = ALTERNATEFOLDER + THUMBNAME;
+            }
+        }
+        return datPath;
+    }
+
     public static String load(PicCell links) throws ImageLoadException {
         long flag = -1;
-        String rootFolder = "C:/Users";
-        if (System.getProperty("os.name").equals("Linux")) rootFolder = "/home";
-        String user = System.getProperty("user.name");
-        String datPath =  String.format(FOLDER, rootFolder, user);
 
-        try {
-            if (!Files.exists(Paths.get(datPath))) {
-                Files.createDirectory(Paths.get(datPath));
-            }
-            datPath = FOLDER + PICNAME;
-        } catch (IOException e) {
-            datPath = ALTERNATEFOLDER + PICNAME;
-        }
+        String datPath = makePath(true);
 
         datPath = String.format(datPath, user);
         for (var link: links.getOriginals()) {
@@ -50,19 +68,8 @@ public class ImageLoader {
 
     public static String loadThumbnail(PicCell links) throws ImageLoadException {
         long flag = -1;
-        String rootFolder = "C:/Users";
-        if (System.getProperty("os.name").equals("Linux")) rootFolder = "home";
-        String user = System.getProperty("user.name");
-        String datPath = String.format(FOLDER, rootFolder, user);
 
-        try {
-            if (!Files.exists(Paths.get(datPath))) {
-                Files.createDirectory(Paths.get(datPath));
-            }
-            datPath = FOLDER + THUMBNAME;
-        } catch (IOException e) {
-            datPath = ALTERNATEFOLDER + THUMBNAME;
-        }
+        String datPath = makePath(false);
 
         datPath = String.format(datPath, rootFolder, user);
         var link = links.getThumb();
