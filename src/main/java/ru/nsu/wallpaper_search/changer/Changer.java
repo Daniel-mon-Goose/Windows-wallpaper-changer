@@ -9,7 +9,7 @@ import java.util.Objects;
 public class Changer {
     private static final String SCRIPTPATH = "ru/nsu/wallpaper_search/changer/change.ps1";
 
-    private Changer() {
+    Changer() {
         throw new IllegalStateException("Utility class");
     }
 
