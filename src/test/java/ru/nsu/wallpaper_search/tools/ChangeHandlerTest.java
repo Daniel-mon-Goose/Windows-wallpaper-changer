@@ -12,9 +12,5 @@ public class ChangeHandlerTest extends TestCase {
         handler.setCell(cell);
         Assert.assertSame(cell, handler.getCell());
     }
-
-    public void testTestRun() {
-
-    }
-
+    
 }

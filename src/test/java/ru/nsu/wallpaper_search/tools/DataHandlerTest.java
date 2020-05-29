@@ -10,21 +10,18 @@ public class DataHandlerTest extends TestCase {
 
     private static DataHandler handler = new DataHandler();
 
-    public void testSetParams() {
+    public void testGetThumbnails() {
         handler.setWidth(width);
         handler.setHeight(height);
         handler.setTheme(request);
-
-        Assert.assertTrue(handler.getWidth().equals(width) && handler.getHeight().equals(height) && handler.getTheme().equals(request));
-
-    }
-
-    public void testGetThumbnails() {
         handler.run();
         Assert.assertNotNull(handler.getThumbnails());
     }
 
     public void testGetLinks() {
+        handler.setWidth(width);
+        handler.setHeight(height);
+        handler.setTheme(request);
         handler.run();
         Assert.assertNotNull(handler.getLinks());
     }

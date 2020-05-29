@@ -50,17 +50,4 @@ public class DataHandler implements Runnable{
     public List<PicCell> getLinks() {
         return links;
     }
-
-    public Integer getWidth() {
-        return width;
-    }
-
-    public Integer getHeight() {
-        return height;
-    }
-
-    public String getTheme() {
-        return theme;
-    }
-
 }
