@@ -59,7 +59,7 @@ public class Gui extends JFrame {
 
         popularThemesWidth = (int )(paneWidth / 1.5);
         popularThemesHeight = (int)(popularThemesWidth / 1.5);
-        paneHeight = (int) (screenSize.getHeight() * 0.1) + popularThemesHeight;
+        paneHeight = (int) (screenSize.getHeight() * 0.2) + popularThemesHeight;
 
         setPreferredSize(new Dimension(windowWidth + 100, paneHeight));
         prefPane.setPreferredSize(new Dimension(paneWidth, (int)((paneHeight - popularThemesHeight) * 0.5)));
@@ -132,6 +132,16 @@ public class Gui extends JFrame {
         layout.putConstraint(SpringLayout.NORTH, queryPane, 0, SpringLayout.SOUTH, popularThemesPane);
         contentPane.add(popularThemesPane, layout);
 
+        contentPane.setBackground(new Color (81, 76, 108));
+        popularThemesPane.setBackground(new Color (81, 76, 108));
+//        try {
+//            BufferedImage image = ImageIO.read(new File("./src/main/resources/background.jpg"));
+//            JLabel label = new JLabel(new ImageIcon(image));
+//            contentPane.add(label);
+//
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
         popularThemesPane.setVisible(true);
         popularThemesPane.setPreferredSize(new Dimension(popularThemesWidth, popularThemesHeight));
     }
@@ -155,7 +165,7 @@ public class Gui extends JFrame {
         int space = (buttonSize / 10);
 
         Graphics2D graphics = popularThemes.createGraphics();
-        graphics.setPaint(Color.WHITE);
+        graphics.setPaint(new Color (81, 76, 108));
         graphics.fillRect(0, 0, popularThemes.getWidth(), popularThemes.getHeight());
         int x = 0;
         int y = 0;
@@ -184,6 +194,7 @@ public class Gui extends JFrame {
         };
 
         resultsPane = new JScrollPane(galleryPane);
+        resultsPane.getVerticalScrollBar().setUnitIncrement(30);
         setLayout(layout);
         layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, resultsPane, 0, SpringLayout.HORIZONTAL_CENTER, queryPane);
         layout.putConstraint(SpringLayout.NORTH, resultsPane, 0, SpringLayout.SOUTH, queryPane);
@@ -191,7 +202,6 @@ public class Gui extends JFrame {
 
         resultsPane.setVisible(true);
         galleryPane.setVisible(true);
-
         galleryWidth = windowWidth - 20;
         xCellSize = galleryWidth / IMAGES_IN_ROW - 2 * SPACE_SIZE;
         yCellSize = xCellSize * (int)heightBox.getSelectedItem() / (int)widthBox.getSelectedItem();
