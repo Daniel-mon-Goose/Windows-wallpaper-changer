@@ -42,7 +42,7 @@ public class DataHandler implements Runnable{
         this.theme = theme;
     }
 
-    public ArrayList<BufferedImage> getThumbnails() {
+    public List<BufferedImage> getThumbnails() {
         return thumbnails;
     }
 
