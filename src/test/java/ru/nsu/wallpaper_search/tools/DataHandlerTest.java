@@ -16,15 +16,8 @@ public class DataHandlerTest{
         handler.setHeight(height);
         handler.setTheme(request);
         handler.run();
-        Assert.assertNotNull(handler.getThumbnails());
-    }
-
-    @Test
-    public void testGetLinks() {
-        handler.setWidth(width);
-        handler.setHeight(height);
-        handler.setTheme(request);
-        handler.run();
+        Assert.assertFalse(handler.getThumbnails().isEmpty());
         Assert.assertNotNull(handler.getLinks());
     }
+
 }
