@@ -52,7 +52,7 @@ public class ImageLoader {
 
         String datPath = makePath(true);
 
-        datPath = String.format(datPath, user);
+        datPath = String.format(datPath, rootFolder, user);
         for (var link: links.getOriginals()) {
             try (var netStream = new URL(link).openStream()) {
                 flag = Files.copy(netStream, Paths.get(datPath), StandardCopyOption.REPLACE_EXISTING);
