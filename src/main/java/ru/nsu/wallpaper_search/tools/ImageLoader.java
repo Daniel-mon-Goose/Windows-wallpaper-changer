@@ -9,8 +9,8 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 
 public class ImageLoader {
-    private static final String FOLDER = "C:/Users/%s/WallpaperSearcher";
-    private static final String ALTERNATEFOLDER = "C:/Users/%s/";
+    private static final String FOLDER = "/%s/%s/WallpaperSearcher";
+    private static final String ALTERNATEFOLDER = "/%s/%s/";
     private static final String PICNAME = "/found.jpg";
 
     private ImageLoader() {
@@ -19,8 +19,10 @@ public class ImageLoader {
 
     public static String load(PicCell links) throws ImageLoadException {
         long flag = -1;
+        String rootFolder = "C:/Users";
+        if (System.getProperty("os.name").equals("Linux")) rootFolder = "home";
         String user = System.getProperty("user.name");
-        String datPath =  String.format(FOLDER, user);
+        String datPath =  String.format(FOLDER, rootFolder, user);
 
         try {
             if (!Files.exists(Paths.get(datPath))) {
@@ -47,8 +49,10 @@ public class ImageLoader {
 
     public static String loadThumbnail(PicCell links) throws ImageLoadException {
         long flag = -1;
+        String rootFolder = "C:/Users";
+        if (System.getProperty("os.name").equals("Linux")) rootFolder = "home";
         String user = System.getProperty("user.name");
-        String datPath = String.format(FOLDER, user);
+        String datPath = String.format(FOLDER, rootFolder, user);
 
         try {
             if (!Files.exists(Paths.get(datPath))) {
@@ -59,7 +63,7 @@ public class ImageLoader {
             datPath = ALTERNATEFOLDER + PICNAME;
         }
 
-        datPath = String.format(datPath, user);
+        datPath = String.format(datPath, rootFolder, user);
         var link = links.getThumb();
         try (var netStream = new URL(link).openStream()) {
             flag = Files.copy(netStream, Paths.get(datPath), StandardCopyOption.REPLACE_EXISTING);
