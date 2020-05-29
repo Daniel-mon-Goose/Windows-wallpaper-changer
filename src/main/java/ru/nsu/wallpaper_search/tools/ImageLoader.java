@@ -18,7 +18,7 @@ public class ImageLoader {
     private static String rootFolder = "C:/Users";
 
 
-    private ImageLoader() {
+    ImageLoader() {
         throw new IllegalStateException("Utility class");
     }
 

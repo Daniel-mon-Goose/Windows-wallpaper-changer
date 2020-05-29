@@ -8,6 +8,7 @@ import java.io.IOException;
 
 public class ImageLoaderTest {
     private static final Class<ImageLoadException> error = ImageLoadException.class;
+    private static final Class<IllegalStateException> instanceError = IllegalStateException.class;
 
     private static final String blockedLink = "https://picstatio.com/download/1600x900/utngox/The-Legend" +
             "-Of-Zelda-Breath-Of-The-Wild-video-game-gaming-art-wallpaper.jpg";
@@ -16,6 +17,13 @@ public class ImageLoaderTest {
 
     private static final String alternatePath = "C:/Users/%s/WallpaperSearcher/found.jpg";
     private static final String path = "C:/Users/%s/found.jpg";
+
+    @Test
+    public void instanceTest() {
+        Assert.assertThrows(instanceError, () -> {
+            var instance = new ImageLoader();
+        });
+    }
 
     @Test
     public void loadTest() throws IOException {
