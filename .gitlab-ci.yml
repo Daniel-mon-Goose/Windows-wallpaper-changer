@@ -8,7 +8,7 @@ stages:
 variables:
   MAVEN_CLI_OPTS: "--batch-mode"
   MAVEN_OPTS: "-Dmaven.repo.local=.m2/repository"
-  SONAR_TOKEN: 82747c9a14d36b0bec2e435cb45c5a7dc9218805
+  SONAR_TOKEN: c6c2198239b3732ba6d0a77f9ac36bbb3b873c92
   SONAR_HOST_URL: http://84.237.50.237:9000
   GIT_DEPTH: 0
   
