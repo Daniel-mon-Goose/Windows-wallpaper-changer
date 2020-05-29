@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 public class GuiController {
     private Gui view;
-    DataHandler searcher;
+    private DataHandler searcher;
     private Runnable changeWP;
     private static final String PLACEHOLDER = "Enter your request...";
     private PicController picController;
@@ -42,6 +42,9 @@ public class GuiController {
     }
 
     private void sendRequest(ActionEvent e) {
+        searcher.setWidth(getWidth());
+        searcher.setHeight(getHeight());
+        searcher.setTheme(getRequest());
         searcher.run();
         drawImages(searcher.getThumbnails());
     }

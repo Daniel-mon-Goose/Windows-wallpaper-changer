@@ -45,7 +45,7 @@ public class ImageLoader {
         throw new ImageLoadException("Failed to access an image via any link");
     }
 
-    public static String loadThumnail(PicCell links) throws ImageLoadException {
+    public static String loadThumbnail(PicCell links) throws ImageLoadException {
         long flag = -1;
         String user = System.getProperty("user.name");
         String datPath = String.format(FOLDER, user);
