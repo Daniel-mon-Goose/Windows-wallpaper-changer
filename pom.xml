@@ -52,7 +52,7 @@
                     <destFile>${project.basedir}/target/jacoco.exec</destFile>
                     <dataFile>${project.basedir}/target/jacoco.exec</dataFile>
                     <excludes>
-                        <exclude>wallpaper_search/src/main/java/ru/nsu/wallpaper_search/gui/**/*</exclude>
+                        <exclude>src/main/java/ru/nsu/wallpaper_search/gui/**/*</exclude>
                     </excludes>
                 </configuration>
                 <executions>
