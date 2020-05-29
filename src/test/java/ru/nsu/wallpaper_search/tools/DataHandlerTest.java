@@ -11,12 +11,12 @@ public class DataHandlerTest{
     private static DataHandler handler = new DataHandler();
 
     @Test
-    public void testGetThumbnails() {
+    public void testDataHand() {
         handler.setWidth(width);
         handler.setHeight(height);
         handler.setTheme(request);
         handler.run();
-        Assert.assertFalse(handler.getThumbnails().isEmpty());
+        Assert.assertNotNull(handler.getThumbnails());
         Assert.assertNotNull(handler.getLinks());
     }
 

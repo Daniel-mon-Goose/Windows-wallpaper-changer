@@ -22,6 +22,7 @@ public class DataHandler implements Runnable{
     public void run() {
         try {
             thumbnails = new ArrayList<>();
+            links = new ArrayList<>();
             links = new Scraper().respondWithQuery(width.toString() + "x" + height.toString(), theme);
             for (var thumb : links) {
                 thumbnails.add(ImageIO.read(new File(ImageLoader.loadThumbnail(thumb))));
