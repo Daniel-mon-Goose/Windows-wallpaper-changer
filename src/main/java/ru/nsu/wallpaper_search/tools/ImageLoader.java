@@ -13,7 +13,7 @@ public class ImageLoader {
     private static final String ALTERNATEFOLDER = "/%s/%s/";
     private static final String PICNAME = "/found.jpg";
     private static final String THUMBNAME = "/thumb.jpg";
-    private static final String user = System.getProperty("user.name");
+    private static final String USER = System.getProperty("user.name");
 
     private static String rootFolder = "C:/Users";
 
@@ -24,7 +24,7 @@ public class ImageLoader {
 
     private static String makePath(boolean mode) {
         if (System.getProperty("os.name").equals("Linux")) rootFolder = "/home";
-        String datPath =  String.format(FOLDER, rootFolder, user);
+        String datPath =  String.format(FOLDER, rootFolder, USER);
         if (mode) {
             try {
                 if (!Files.exists(Paths.get(datPath))) {
@@ -52,7 +52,7 @@ public class ImageLoader {
 
         String datPath = makePath(true);
 
-        datPath = String.format(datPath, rootFolder, user);
+        datPath = String.format(datPath, rootFolder, USER);
         for (var link: links.getOriginals()) {
             try (var netStream = new URL(link).openStream()) {
                 flag = Files.copy(netStream, Paths.get(datPath), StandardCopyOption.REPLACE_EXISTING);
@@ -71,7 +71,7 @@ public class ImageLoader {
 
         String datPath = makePath(false);
 
-        datPath = String.format(datPath, rootFolder, user);
+        datPath = String.format(datPath, rootFolder, USER);
         var link = links.getThumb();
         try (var netStream = new URL(link).openStream()) {
             flag = Files.copy(netStream, Paths.get(datPath), StandardCopyOption.REPLACE_EXISTING);
