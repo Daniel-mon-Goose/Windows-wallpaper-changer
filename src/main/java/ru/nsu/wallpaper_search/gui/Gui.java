@@ -41,6 +41,7 @@ public class Gui extends JFrame {
     private int xCellSize;
     private int yCellSize;
     private int imagesNum;
+    private int buttonSize;
     private static final int SPACE_SIZE = 10;
     private static final int IMAGES_IN_ROW = 5;
     private Map<BufferedImage, Coords> imageCoords = new HashMap<>();
@@ -150,7 +151,7 @@ public class Gui extends JFrame {
         }
         popularThemes = new BufferedImage(popularThemesWidth, popularThemesHeight, BufferedImage.TYPE_INT_RGB);
 
-        int buttonSize = (popularThemesWidth * 10 / 36);
+        buttonSize = (popularThemesWidth * 10 / 36);
         int space = (buttonSize / 10);
 
         Graphics2D graphics = popularThemes.createGraphics();
@@ -253,6 +254,23 @@ public class Gui extends JFrame {
             }
         }
         return null;
+    }
+
+    String getImageLabel(Coords coords) {
+        int x, y;
+        for(Map.Entry<String, Coords> entry : buttonsCoords.entrySet()) {
+            x = entry.getValue().getX();
+            y = entry.getValue().getY();
+            if (x <= coords.getX() && coords.getX() <= x + buttonSize &&
+                    y <= coords.getY() && coords.getY() <= y + buttonSize) {
+                return entry.getKey();
+            }
+        }
+        return null;
+    }
+
+    void setQueryField(String text) {
+        queryField.setText(text);
     }
 
 }

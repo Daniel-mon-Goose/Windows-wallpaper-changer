@@ -38,6 +38,7 @@ public class GuiController {
         });
 
         view.addSearchListener(this::sendRequest);
+        view.addThemesListener(new ThemesListener());
     }
 
     private void sendRequest(ActionEvent e) {
@@ -74,6 +75,32 @@ public class GuiController {
                 if (img != null) {
                     view.setEnabled(false);
                     picController = new PicController(img, changeWP, () -> view.setEnabled(true));
+                }
+            }
+        }
+
+        @Override
+        public void mousePressed(MouseEvent e) {}
+
+        @Override
+        public void mouseReleased(MouseEvent e) {}
+
+        @Override
+        public void mouseEntered(MouseEvent e) {}
+
+        @Override
+        public void mouseExited(MouseEvent e) {}
+    }
+
+    class ThemesListener implements MouseListener {
+
+        @Override
+        public void mouseClicked(MouseEvent e) {
+            if (e.getClickCount() == 2) {
+                String label = view.getImageLabel(new Coords(e.getX(), e.getY()));
+                if (label != null) {
+                    view.setQueryField(label);
+                    searcher.run();
                 }
             }
         }
