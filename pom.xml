@@ -21,6 +21,9 @@
         <sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
         <sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
         <sonar.language>java</sonar.language>
+        <sonar.coverage.exclusions>
+            **/gui/**/*
+        </sonar.coverage.exclusions>
     </properties>
 
     <build>
@@ -52,7 +55,7 @@
                     <destFile>${project.basedir}/target/jacoco.exec</destFile>
                     <dataFile>${project.basedir}/target/jacoco.exec</dataFile>
                     <excludes>
-                        <exclude>**/gui/**</exclude>
+                        <exclude>**/gui/**/*</exclude>
                     </excludes>
                 </configuration>
                 <executions>
