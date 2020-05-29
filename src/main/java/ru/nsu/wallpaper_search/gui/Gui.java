@@ -109,7 +109,26 @@ public class Gui extends JFrame {
         setResizable(false);
     }
 
-    private void addPopularThemes() {}
+    private void addPopularThemes() {
+    popularThemesPane = new JPanel() {
+        @Override
+        public void paintComponent(Graphics g) {
+            super.paintComponent(g);
+            g.drawImage(popularThemes, 0, 0, this);
+        }
+    };
+    setLayout(layout);
+    layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, prefPane, 0, SpringLayout.HORIZONTAL_CENTER, contentPane);
+    layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, popularThemesPane, 0, SpringLayout.HORIZONTAL_CENTER, prefPane);
+    layout.putConstraint(SpringLayout.HORIZONTAL_CENTER, queryPane, 0, SpringLayout.HORIZONTAL_CENTER, popularThemesPane);
+    layout.putConstraint(SpringLayout.NORTH, prefPane, 0, SpringLayout.NORTH, contentPane);
+    layout.putConstraint(SpringLayout.NORTH, popularThemesPane, 0, SpringLayout.SOUTH, prefPane);
+    layout.putConstraint(SpringLayout.NORTH, queryPane, 0, SpringLayout.SOUTH, popularThemesPane);
+    contentPane.add(popularThemesPane, layout);
+
+    popularThemesPane.setVisible(true);
+    popularThemesPane.setPreferredSize(new Dimension(popularThemesWidth, popularThemesHeight));
+    }
 
     public void drawPopularThemes() {
         addPopularThemes();
