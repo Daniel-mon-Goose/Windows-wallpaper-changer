@@ -260,7 +260,8 @@ public class Gui extends JFrame {
     }
 
     BufferedImage getImage(Coords coords) {
-        int x, y;
+        int x;
+        int y;
         for(Map.Entry<BufferedImage, Coords> entry : imageCoords.entrySet()) {
             x = entry.getValue().getX();
             y = entry.getValue().getY();
@@ -273,12 +274,9 @@ public class Gui extends JFrame {
     }
 
     String getImageLabel(Coords coords) {
-        int x, y;
         for(Map.Entry<String, Coords> entry : buttonsCoords.entrySet()) {
-            x = entry.getValue().getX();
-            y = entry.getValue().getY();
-            if (x <= coords.getX() && coords.getX() <= x + buttonSize &&
-                    y <= coords.getY() && coords.getY() <= y + buttonSize) {
+            if (entry.getValue().getX() <= coords.getX() && coords.getX() <= entry.getValue().getX() + buttonSize &&
+                    entry.getValue().getY() <= coords.getY() && coords.getY() <= entry.getValue().getY() + buttonSize) {
                 return entry.getKey();
             }
         }

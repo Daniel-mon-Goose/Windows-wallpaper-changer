@@ -88,16 +88,24 @@ public class GuiController {
         }
 
         @Override
-        public void mousePressed(MouseEvent e) {}
+        public void mousePressed(MouseEvent e) {
+            // mouse listener implementation requires to override all methods (even if they aren't necessary)
+        }
 
         @Override
-        public void mouseReleased(MouseEvent e) {}
+        public void mouseReleased(MouseEvent e) {
+            // mouse listener implementation requires to override all methods (even if they aren't necessary)
+        }
 
         @Override
-        public void mouseEntered(MouseEvent e) {}
+        public void mouseEntered(MouseEvent e) {
+            // mouse listener implementation requires to override all methods (even if they aren't necessary)
+        }
 
         @Override
-        public void mouseExited(MouseEvent e) {}
+        public void mouseExited(MouseEvent e) {
+            // mouse listener implementation requires to override all methods (even if they aren't necessary)
+        }
     }
 
     class ThemesListener implements MouseListener {
@@ -118,16 +126,24 @@ public class GuiController {
         }
 
         @Override
-        public void mousePressed(MouseEvent e) {}
+        public void mousePressed(MouseEvent e) {
+            // mouse listener implementation requires to override all methods (even if they aren't necessary)
+        }
 
         @Override
-        public void mouseReleased(MouseEvent e) {}
+        public void mouseReleased(MouseEvent e) {
+            // mouse listener implementation requires to override all methods (even if they aren't necessary)
+        }
 
         @Override
-        public void mouseEntered(MouseEvent e) {}
+        public void mouseEntered(MouseEvent e) {
+            // mouse listener implementation requires to override all methods (even if they aren't necessary)
+        }
 
         @Override
-        public void mouseExited(MouseEvent e) {}
+        public void mouseExited(MouseEvent e) {
+            // mouse listener implementation requires to override all methods (even if they aren't necessary)
+        }
     }
 
 }
