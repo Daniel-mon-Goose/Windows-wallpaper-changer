@@ -136,14 +136,6 @@ public class Gui extends JFrame {
 
         contentPane.setBackground(new Color (81, 76, 108));
         popularThemesPane.setBackground(new Color (81, 76, 108));
-//        try {
-//            BufferedImage image = ImageIO.read(new File("./src/main/resources/background.jpg"));
-//            JLabel label = new JLabel(new ImageIcon(image));
-//            contentPane.add(label);
-//
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
         popularThemesPane.setVisible(true);
         popularThemesPane.setPreferredSize(new Dimension(popularThemesWidth, popularThemesHeight));
     }
