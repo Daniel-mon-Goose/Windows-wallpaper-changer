@@ -44,7 +44,7 @@ public class Gui extends JFrame {
     private int buttonSize;
     private static final int SPACE_SIZE = 10;
     private static final int IMAGES_IN_ROW = 5;
-    private Map<BufferedImage, Coords> imageCoords = new HashMap<>();
+    private Map<BufferedImage, Coords> imageCoords;
     private Map<String, Coords> buttonsCoords = new HashMap<>();
 
     public Gui() {
@@ -214,7 +214,7 @@ public class Gui extends JFrame {
 
     public void drawImages(ArrayList<BufferedImage> images) {
         imagesNum = images.size();
-
+        imageCoords = new HashMap<>();
         if (imagesNum == 0) {
             JOptionPane.showMessageDialog(this, "No results.");
             return;
