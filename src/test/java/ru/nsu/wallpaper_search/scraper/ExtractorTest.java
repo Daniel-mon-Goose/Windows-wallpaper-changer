@@ -25,7 +25,7 @@ public class ExtractorTest {
             new FileReader("./out.txt").read(CharBuffer.wrap(buf));
             Document doc = Extractor.accessPicturesPage("1920x1080", "zelda");
             doc.text(buf);
-            Assert.assertNotNull(Extractor.getPictures(doc));
+            Assert.assertFalse(Extractor.getPictures(doc).isEmpty());
         } catch (IOException e) {
             Assert.assertThrows(IOException.class, () -> Extractor.getDoc("dummy", false));
         }
