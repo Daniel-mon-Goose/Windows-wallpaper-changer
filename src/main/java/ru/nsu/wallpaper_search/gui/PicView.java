@@ -17,6 +17,7 @@ public class PicView extends JFrame {
     private int BUTTON_HEIGHT = 30;
 
     public PicView(BufferedImage pic, Runnable notifyOnClose) {
+        setUndecorated(true);
         contentPane = new JPanel();
 
         picWidth = pic.getWidth();
@@ -47,11 +48,10 @@ public class PicView extends JFrame {
         this.add(contentPane);
 
         setContentPane(contentPane);
-        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setTitle("Wallpaper search");
 
-        this.setPreferredSize(new Dimension(picWidth + 10, picHeight + BUTTON_HEIGHT + 15));
-        this.setResizable(false);
+        this.setPreferredSize(new Dimension(picWidth + 10, picHeight + BUTTON_HEIGHT + 50));
+//        this.setResizable(true);
         this.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
                 notifyOnClose.run();

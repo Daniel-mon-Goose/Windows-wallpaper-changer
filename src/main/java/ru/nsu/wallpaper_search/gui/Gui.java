@@ -44,7 +44,7 @@ public class Gui extends JFrame {
     private int buttonSize;
     private static final int SPACE_SIZE = 10;
     private static final int IMAGES_IN_ROW = 5;
-    private Map<BufferedImage, Coords> imageCoords = new HashMap<>();
+    private Map<BufferedImage, Coords> imageCoords;
     private Map<String, Coords> buttonsCoords = new HashMap<>();
 
     public Gui() {
@@ -59,7 +59,7 @@ public class Gui extends JFrame {
 
         popularThemesWidth = (int )(paneWidth / 1.5);
         popularThemesHeight = (int)(popularThemesWidth / 1.5);
-        paneHeight = (int) (screenSize.getHeight() * 0.2) + popularThemesHeight;
+        paneHeight = (int) (screenSize.getHeight() * 0.2) + popularThemesHeight + 30;
 
         setPreferredSize(new Dimension(windowWidth + 100, paneHeight));
         prefPane.setPreferredSize(new Dimension(paneWidth, (int)((paneHeight - popularThemesHeight) * 0.5)));
@@ -214,7 +214,7 @@ public class Gui extends JFrame {
 
     public void drawImages(ArrayList<BufferedImage> images) {
         imagesNum = images.size();
-
+        imageCoords = new HashMap<>();
         if (imagesNum == 0) {
             JOptionPane.showMessageDialog(this, "No results.");
             return;
