@@ -11,7 +11,6 @@ import ru.nsu.wallpaper_search.tools.PicCell;
 import java.io.IOException;
 import java.net.ConnectException;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 public class ScraperTest {
     private void printResult(List<PicCell> pics) {
@@ -23,7 +22,6 @@ public class ScraperTest {
     }
 
     private int scrapingAutomatedVersion(String size, String theme) throws IOException, InterruptedException {
-        TimeUnit.SECONDS.sleep(5);
         var pics = new Scraper().respondWithQuery(size, theme);
         printResult(pics);
 
