@@ -15,9 +15,8 @@ public class Main {
     }
 
     private static void extractOne() {
-        try {
+        try (FileWriter fw = new FileWriter("./out.txt")) {
             var doc = Extractor.accessPicturesPage("1920x1080", "zelda");
-            FileWriter fw = new FileWriter("./out.txt");
             fw.write(String.valueOf(doc));
         } catch (IOException e) {
             e.printStackTrace();
