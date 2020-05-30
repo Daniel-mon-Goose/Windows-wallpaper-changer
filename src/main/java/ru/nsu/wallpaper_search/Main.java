@@ -19,7 +19,7 @@ public class Main {
             var doc = Extractor.accessPicturesPage("1920x1080", "zelda");
             fw.write(String.valueOf(doc));
         } catch (IOException e) {
-            e.printStackTrace();
+            //ignore
         }
     }
 

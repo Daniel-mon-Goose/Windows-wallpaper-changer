@@ -157,7 +157,7 @@ public class Gui extends JFrame {
             buttons.put(ImageIO.read(new File("./src/main/resources/food.jpg")), "food");
             buttons.put(ImageIO.read(new File("./src/main/resources/cars.jpg")), "cars");
         } catch (IOException e) {
-            e.printStackTrace();
+            //ignore
         }
         popularThemes = new BufferedImage(popularThemesWidth, popularThemesHeight, BufferedImage.TYPE_INT_RGB);
 
