@@ -21,6 +21,7 @@ public class DataHandlerTest{
         handler.run();
         Assert.assertNotNull(handler.getThumbnails());
         Assert.assertNotNull(handler.getLinks());
+        Assert.assertTrue(handler.isError());
     }
 
     @Test

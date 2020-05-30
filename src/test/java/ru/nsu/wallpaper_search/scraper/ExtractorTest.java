@@ -23,7 +23,7 @@ public class ExtractorTest {
         try {
             File input = new File("./test.html");
             Document doc = Jsoup.parse(input, "UTF-8", "http://example.com/");
-            Assert.assertNotNull(Extractor.getPictures(doc));
+            Assert.assertFalse(Extractor.getPictures(doc).isEmpty());
         } catch (IOException e) {
             Assert.assertThrows(IOException.class, () -> Extractor.getDoc("dummy", false));
         }
