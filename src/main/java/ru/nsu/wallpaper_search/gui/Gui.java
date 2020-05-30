@@ -24,10 +24,10 @@ public class Gui extends JFrame {
     private JTextField queryField;
     private JButton searchButton;
     private JPanel popularThemesPane;
-    private BufferedImage popularThemes;
+    private transient BufferedImage popularThemes;
     private JScrollPane resultsPane;
-    private BufferedImage gallery;
-    private SpringLayout layout = new SpringLayout();
+    private transient BufferedImage gallery;
+    private transient SpringLayout layout = new SpringLayout();
 
     private int popularThemesWidth;
     private int popularThemesHeight;
@@ -44,8 +44,8 @@ public class Gui extends JFrame {
     private int buttonSize;
     private static final int SPACE_SIZE = 10;
     private static final int IMAGES_IN_ROW = 5;
-    private Map<BufferedImage, Coords> imageCoords;
-    private Map<String, Coords> buttonsCoords = new HashMap<>();
+    private transient Map<BufferedImage, Coords> imageCoords;
+    private transient Map<String, Coords> buttonsCoords = new HashMap<>();
 
     public Gui() {
         add(contentPane);

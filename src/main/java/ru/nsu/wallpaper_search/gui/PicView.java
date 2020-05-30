@@ -14,7 +14,7 @@ public class PicView extends JFrame {
     private int picWidth;
     private int picHeight;
     private static final int BUTTONWIDTH = 200;
-    private int BUTTONHEIGHT = 30;
+    private static final int BUTTONHEIGHT = 30;
 
     public PicView(BufferedImage pic, Runnable notifyOnClose) {
         setUndecorated(true);
