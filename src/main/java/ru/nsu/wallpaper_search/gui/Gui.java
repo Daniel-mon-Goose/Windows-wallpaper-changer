@@ -59,7 +59,7 @@ public class Gui extends JFrame {
 
         popularThemesWidth = (int )(paneWidth / 1.5);
         popularThemesHeight = (int)(popularThemesWidth / 1.5);
-        paneHeight = (int) (screenSize.getHeight() * 0.2) + popularThemesHeight;
+        paneHeight = (int) (screenSize.getHeight() * 0.2) + popularThemesHeight + 30;
 
         setPreferredSize(new Dimension(windowWidth + 100, paneHeight));
         prefPane.setPreferredSize(new Dimension(paneWidth, (int)((paneHeight - popularThemesHeight) * 0.5)));
