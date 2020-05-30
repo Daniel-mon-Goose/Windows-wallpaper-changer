@@ -86,10 +86,12 @@ public class Gui extends JFrame {
         return queryField;
     }
 
+    @Override
     public int getWidth() {
         return (int) widthBox.getSelectedItem();
     }
 
+    @Override
     public int getHeight() {
         return (int) heightBox.getSelectedItem();
     }
