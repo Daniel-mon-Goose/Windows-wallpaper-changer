@@ -33,7 +33,7 @@ public class ExtractorTest {
     public void failGetPicturesTest() {
         try {
             var doc = Extractor.accessPicturesPage("1920x1080", "zelda");
-            Assert.assertTrue(Extractor.getPictures(doc).isEmpty());
+            Assert.assertNotNull(Extractor.getPictures(doc);
         } catch (IOException e) {
             Assert.assertThrows(IOException.class, () -> Extractor.getDoc("dummy", false));
         }
