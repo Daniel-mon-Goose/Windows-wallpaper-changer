@@ -4,6 +4,7 @@ stages:
   - build
   - test
   - jacoco_check
+  - deploy
 
 variables:
   MAVEN_CLI_OPTS: "--batch-mode"
@@ -32,5 +33,12 @@ sonareqube-check:
   script:
     - mvn sonar:sonar -Dsonar.projectKey=PADS_WC -Dsonar.host.url=$SONAR_HOST_URL -Dsonar.login=$SONAR_TOKEN -Dsonar.core.codeCoveragePlugin=jacoco -Dsonar.jacoco.reportPath=/target/jacoco.exec -Dsonar.dynamicAnalysis=reuseReports -Dsonar.surefire.reportsPath=/target/test-reports
   allow_failure: true
+  only:
+    - master
+
+deploy:
+  stage: deploy
+  script:
+    - mvn deploy -s ci_settings.xml
   only:
     - master

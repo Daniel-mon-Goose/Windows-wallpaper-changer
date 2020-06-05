@@ -131,7 +131,24 @@
             <artifactId>jpse</artifactId>
             <version>0.1.0</version>
         </dependency>
-
     </dependencies>
+
+    <repositories>
+        <repository>
+            <id>gitlab-maven</id>
+            <url>https://gitlab.com/api/v4/projects/19210447/packages/maven</url>
+        </repository>
+    </repositories>
+    <distributionManagement>
+        <repository>
+            <id>gitlab-maven</id>
+            <url>https://gitlab.com/api/v4/projects/19210447/packages/maven</url>
+        </repository>
+        <snapshotRepository>
+            <id>gitlab-maven</id>
+            <url>https://gitlab.com/api/v4/projects/19210447/packages/maven</url>
+        </snapshotRepository>
+    </distributionManagement>
+
 
 </project>
