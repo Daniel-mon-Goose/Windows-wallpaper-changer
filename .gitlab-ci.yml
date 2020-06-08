@@ -1,34 +1,23 @@
 image: maven:3-jdk-11
 
 stages:
-  - build
-  - test
-  - jacoco_check
   - deploy
+  - jacoco_check
 
 variables:
   MAVEN_CLI_OPTS: "--batch-mode"
   MAVEN_OPTS: "-Dmaven.repo.local=.m2/repository"
   SONAR_TOKEN: c6c2198239b3732ba6d0a77f9ac36bbb3b873c92
   SONAR_HOST_URL: http://84.237.50.237:9000
-  GIT_DEPTH: 0
-  
-cache:
-  paths:
-    - .m2/repository/
-    - target/
 
-build:
-  stage: build
+deploy:
+  stage: deploy
   script:
-    - mvn $MAVEN_CLI_OPTS clean compile
+    - mvn $MAVEN_CLI_OPTS clean deploy -s ci_settings.xml
+  only:
+    - master
     
-test:
-  stage: test
-  script:
-    - mvn $MAVEN_CLI_OPTS test
-    
-sonareqube-check:
+sonarqube-check:
   stage: jacoco_check
   script:
     - mvn sonar:sonar -Dsonar.projectKey=PADS_WC -Dsonar.host.url=$SONAR_HOST_URL -Dsonar.login=$SONAR_TOKEN -Dsonar.core.codeCoveragePlugin=jacoco -Dsonar.jacoco.reportPath=/target/jacoco.exec -Dsonar.dynamicAnalysis=reuseReports -Dsonar.surefire.reportsPath=/target/test-reports
@@ -36,9 +25,3 @@ sonareqube-check:
   only:
     - master
 
-deploy:
-  stage: deploy
-  script:
-    - mvn deploy -s ci_settings.xml
-  only:
-    - master
