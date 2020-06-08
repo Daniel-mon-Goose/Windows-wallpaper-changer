@@ -10,10 +10,15 @@ variables:
   SONAR_TOKEN: c6c2198239b3732ba6d0a77f9ac36bbb3b873c92
   SONAR_HOST_URL: http://84.237.50.237:9000
 
+cache:
+  paths:
+    - .m2/repository/
+    - target/
+
 deploy:
   stage: deploy
   script:
-    - mvn $MAVEN_CLI_OPTS clean deploy -s ci_settings.xml
+    - mvn $MAVEN_CLI_OPTS deploy -s ci_settings.xml
   only:
     - master
     
